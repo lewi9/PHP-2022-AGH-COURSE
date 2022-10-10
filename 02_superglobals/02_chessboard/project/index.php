@@ -4,27 +4,38 @@ ini_set("display_errors", "On");
 
 session_start();
 
-
 $sx = $_SESSION["sx"] ?? 10;
 $sz = $_SESSION["sz"] ?? 10;
 $col = $_SESSION["col"] ?? array();
-$color = $_SESSION["color"] ?? "empty";
 $counter = $_SESSION["count"] ?? 0;
 $x = $_SESSION["x"] ?? 0;
 $y = $_SESSION["y"] ?? 0;
+$color = $_COOKIE["color"]??"gray";
 
-if(isset($_COOKIE["color"]) and $color == "empty")
+if(isset($_COOKIE["color"]))
 {
-    $color = $_COOKIE["color"];
-}
-elseif(!isset($_COOKIE['color']))
-{
-    $color = "gray";
-    setcookie('color', $color );
+    //$color = $_COOKIE["color"];
+    setcookie("color", $color);
     $_COOKIE["color"] = $color;
 }
 
+else
+{
+    if($_SESSION["craate_cookie"])
+    {
+        setcookie("color", "gray");
+        $_COOKIE["color"] = "gray";
+        $_SESSION["craate_cookie"] = 0;
+    }
+    $_SESSION["craate_cookie"] = 1;
 
+
+}
+
+if(isset($_POST["color"]))
+{
+    $color =  $_POST['color'] == "" ? $_COOKIE["color"] : $_POST["color"];
+}
 
 ?>
 
@@ -86,11 +97,6 @@ elseif(!isset($_COOKIE['color']))
         }
     }
 
-    if(isset($_POST["color"]))
-    {
-        $color =  $_POST['color'] == "" ? $_COOKIE["color"] : $_POST["color"];
-    }
-
     if(isset($_POST["sz"]))
     {
         $sz = $_POST["sz"] == "" ? $_SESSION["sz"] : $_POST["sz"];
@@ -118,7 +124,7 @@ elseif(!isset($_COOKIE['color']))
 
             $temp = $col["$ii"]["$i"];
 
-            echo "<a class=\"block $temp \" href=\"?x=$ii&z=$i\"></a>";
+            echo "<a class=\"block $temp\" href=\"?x=$ii&z=$i\"></a>";
         }
         echo "</div>";
     }
@@ -169,7 +175,6 @@ elseif(!isset($_COOKIE['color']))
     $_SESSION["sx"] = $sx;
     $_SESSION["sz"] = $sz;
     $_SESSION["col"] = $col;
-    $_SESSION["color"] = $color;
     $_SESSION["count"] = $counter;
     $_SESSION["x"] = $x;
     $_SESSION["y"] = $y;
