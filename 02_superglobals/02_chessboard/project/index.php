@@ -1,16 +1,33 @@
 <?php
 error_reporting(-1);
 ini_set("display_errors", "On");
+
 session_start();
-$v = $_SESSION['v'] ?? 0;
-$v = $v + 1;
-$_SESSION['v'] = $v;
-if (!isset($_COOKIE['c'])) {
-    setcookie('c', "Value");
+
+
+$sx = $_SESSION["sx"] ?? 3;
+$sz = $_SESSION["sz"] ?? 3;
+$col = $_SESSION["col"] ?? array();
+$color = $_SESSION["color"] ?? "empty";
+$counter = $_SESSION["count"] ?? 0;
+$x = $_SESSION["x"] ?? 0;
+$y = $_SESSION["y"] ?? 0;
+
+if(isset($_COOKIE["color"]) and $color == "empty")
+{
+    $color = $_COOKIE["color"];
 }
-$c = $_COOKIE['c'];
-echo "v: $v, c: $c"
+elseif(!isset($_COOKIE['color']))
+{
+    $color = "gray";
+    setcookie('color', $color );
+    $_COOKIE["color"] = $color;
+}
+
+
+
 ?>
+
 <html lang="en">
 <head>
     <title>Superglobals</title>
@@ -51,11 +68,64 @@ echo "v: $v, c: $c"
 </head>
 <body>
 
-<div>
-    <a class="block gray" href="?x=0&z=0"></a>
-    <a class="block gray" href="?x=1&z=0"></a>
-    <a class="block gray" href="?x=2&z=0"></a>
-</div>
+
+    <?php
+
+    if(isset($_GET["x"]))
+    {
+        Count_Click();
+        if($counter==2)
+        {
+            $counter = 0;
+            Bresenham($x??0,$y??0,$_GET["x"],$_GET["z"]);
+        }
+        else
+        {
+            $x = $_GET["x"];
+            $y = $_GET["z"];
+        }
+    }
+
+    if(isset($_POST["color"]))
+    {
+        $color =  $_POST['color'] == "" ? $_COOKIE["color"] : $_POST["color"];
+    }
+
+    if(isset($_POST["sz"]))
+    {
+        $sz = $_POST["sz"] == "" ? $_SESSION["sz"] : $_POST["sz"];
+    }
+
+    if(isset($_POST["sx"]))
+    {
+        $sx = $_POST["sx"] == "" ? $_SESSION["sx"] : $_POST["sx"];
+    }
+
+    for($i = 0; $i < $sz; $i++)
+    {
+        echo "<div>";
+        for ($ii = 0; $ii<$sx; $ii++)
+        {
+            if(!isset($col["$ii"]["$i"]))
+            {
+                $col["$ii"]["$i"] = $color;
+            }
+
+            if($col["$ii"]["$i"] != "white")
+            {
+                $col["$ii"]["$i"] = $color;
+            }
+
+            $temp = $col["$ii"]["$i"];
+
+            echo "<a class=\"block $temp \" href=\"?x=$ii&z=$i\"></a>";
+        }
+        echo "</div>";
+    }
+
+    ?>
+
+<!--
 <div>
     <a class="block gray" href="?x=0&z=1"></a>
     <a class="block gray" href="?x=1&z=1"></a>
@@ -66,6 +136,7 @@ echo "v: $v, c: $c"
     <a class="block gray" href="?x=1&z=2"></a>
     <a class="block gray" href="?x=2&z=2"></a>
 </div>
+-->
 
 <br/>
 
@@ -94,5 +165,101 @@ echo "v: $v, c: $c"
     <input type="submit" value="Change">
 </form>
 
+    <?php
+    $_SESSION["sx"] = $sx;
+    $_SESSION["sz"] = $sz;
+    $_SESSION["col"] = $col;
+    $_SESSION["color"] = $color;
+    $_SESSION["count"] = $counter;
+    $_SESSION["x"] = $x;
+    $_SESSION["y"] = $y;
+    ?>
 </body>
 </html>
+
+<?php
+function Count_Click()
+{
+    global $counter;
+    $counter +=1;
+}
+
+function Bresenham($x1, $y1, $x2, $y2)
+{
+    global $col;
+    $x = $x1;
+    $y = $y1;
+
+    if ($x1 < $x2)
+    {
+        $xi = 1;
+        $dx = $x2 - $x1;
+    }
+    else
+    {
+        $xi = -1;
+        $dx = $x1 - $x2;
+    }
+
+    if ($y1 < $y2)
+    {
+        $yi = 1;
+        $dy = $y2 - $y1;
+    }
+    else
+    {
+        $yi = -1;
+        $dy = $y1 - $y2;
+    }
+
+    $col[$x][$y] = "white";
+
+    if ($dx > $dy)
+    {
+        $ai = ($dy - $dx) * 2;
+        $bi = $dy * 2;
+        $d = $bi - $dx;
+
+        while ($x != $x2)
+        {
+
+            if ($d >= 0)
+            {
+                $x += $xi;
+                $y += $yi;
+                $d += $ai;
+            }
+            else
+            {
+                $d += $bi;
+                $x += $xi;
+            }
+                $col[$x][$y] = "white";
+         }
+    }
+
+    else
+    {
+        $ai = ( $dx - $dy ) * 2;
+        $bi = $dx * 2;
+        $d = $bi - $dy;
+
+        while ($y != $y2)
+        {
+
+            if ($d >= 0)
+            {
+                $x += $xi;
+                $y += $yi;
+                $d += $ai;
+            }
+            else
+            {
+                $d += $bi;
+                $y += $yi;
+            }
+            $col[$x][$y] = "white";
+        }
+    }
+}
+?>
