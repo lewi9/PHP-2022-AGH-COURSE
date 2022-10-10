@@ -5,8 +5,8 @@ ini_set("display_errors", "On");
 session_start();
 
 
-$sx = $_SESSION["sx"] ?? 3;
-$sz = $_SESSION["sz"] ?? 3;
+$sx = $_SESSION["sx"] ?? 10;
+$sz = $_SESSION["sz"] ?? 10;
 $col = $_SESSION["col"] ?? array();
 $color = $_SESSION["color"] ?? "empty";
 $counter = $_SESSION["count"] ?? 0;
