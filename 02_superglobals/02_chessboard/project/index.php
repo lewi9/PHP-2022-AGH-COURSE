@@ -10,31 +10,13 @@ $col = $_SESSION["col"] ?? array();
 $counter = $_SESSION["count"] ?? 0;
 $x = $_SESSION["x"] ?? 0;
 $y = $_SESSION["y"] ?? 0;
-$color = $_COOKIE["color"]??"gray";
-
-if(isset($_COOKIE["color"]))
-{
-    //$color = $_COOKIE["color"];
-    setcookie("color", $color);
-    $_COOKIE["color"] = $color;
-}
-
-else
-{
-    if($_SESSION["craate_cookie"])
-    {
-        setcookie("color", "gray");
-        $_COOKIE["color"] = "gray";
-        $_SESSION["craate_cookie"] = 0;
-    }
-    $_SESSION["craate_cookie"] = 1;
-
-
-}
+$color = $_COOKIE["color"] ?? "gray";
 
 if(isset($_POST["color"]))
 {
-    $color =  $_POST['color'] == "" ? $_COOKIE["color"] : $_POST["color"];
+    //$color =  $_POST['color'] == "" ? $_COOKIE["color"] : $_POST["color"];
+    $color = $_POST["color"];
+    setcookie("color", $color);
 }
 
 ?>
