@@ -7,9 +7,9 @@ pipelines:
           - composer
           - node
         script:
-          - pushd 02_superglobals/02_chessboard/tests/
+          - pushd 03_pretty_url/02_exercise/tests/
           -   composer install
-          -   php -S localhost:8888 -t ../project/ &
+          -   php -S localhost:8888 -t ../project/public &
           -   vendor/bin/codecept run --xml test_report.xml
           -   killall php
           - popd
