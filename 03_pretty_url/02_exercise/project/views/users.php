@@ -25,6 +25,5 @@ foreach ($users as $user_id => $user)
 }
 echo "</ol>";
 
-?>
 
 

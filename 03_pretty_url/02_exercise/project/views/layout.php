@@ -6,9 +6,18 @@
 </head>
 <body>
 
-<?php require "menu.php" ?>
+<?php require "menu.php" ;
 
-<?php require "../views$view.php"; ?>
+try
+{
+    require "../views$view.php";
+}
+catch(Error $e)
+{
+    require "../views/404.php";
+}
+?>
+
 
 </body>
 </html>

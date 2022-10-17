@@ -1,2 +1,2 @@
 <?php
-echo "<p>Welcome on homepage!<p/>"; ?>
+echo "<p>Welcome on homepage!<p/>"; 

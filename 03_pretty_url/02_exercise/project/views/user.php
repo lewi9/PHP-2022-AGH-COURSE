@@ -23,4 +23,3 @@ echo "<p>User:</p>";
 echo "<p><strong>Name: </strong>" . $user['name'] . "</p>";
 echo "<p><strong>Surname: </strong>" . $user['surname'] . "</p>";
 echo "<p><strong>Age: </strong>" . $user['age'] . "</p>";
-?>

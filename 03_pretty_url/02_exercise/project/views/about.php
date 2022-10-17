@@ -1,2 +1,2 @@
 <?php
-echo "<p>Pretty URL test application!</p>"; ?>
+echo "<p>Pretty URL test application!</p>";
