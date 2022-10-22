@@ -13,9 +13,12 @@ if($parts[1] == "user")
 }
 else
 {
-    if ($parts[2] != "")
+    if(isset($part[2]))
     {
-        $view = "404";
+        if($parts[2] != "")
+        {
+            $view = "404";
+        }
     }
 }
 require "../views/layout.php";
