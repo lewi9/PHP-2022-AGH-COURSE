@@ -7,7 +7,10 @@ pipelines:
           - composer
           - node
         script:
-          - pushd 03_pretty_url/02_exercise/tests/
+          - composer global require phpstan/phpstan
+          - export PATH=~/.composer/vendor/bin/:$PATH
+          - pushd 04_object_oriented/02_exercise/tests/
+          -   phpstan analyze --level max ../project/
           -   composer install
           -   php -S localhost:8888 -t ../project/public &
           -   vendor/bin/codecept run --xml test_report.xml
