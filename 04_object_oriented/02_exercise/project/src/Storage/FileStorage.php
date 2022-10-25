@@ -17,12 +17,8 @@ class FileStorage implements Storage
     {
         $distinguishable = array();
         $dir = scandir(Directory::storage());
-        print_r($dir);
-        for($i=3; $i <10; $i++)
-        {
-
+        for($i=3; $i <count($dir); $i++)
             $distinguishable[] = unserialize(file_get_contents(Directory::Storage() . "/". $dir[$i]));
-        }
 
 
 
