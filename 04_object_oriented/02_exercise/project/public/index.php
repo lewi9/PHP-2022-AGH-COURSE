@@ -18,6 +18,5 @@ Config\Directory::set("../");
 
 // App example
 
-
 $app = new App();
 $app->run();
