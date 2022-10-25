@@ -6,7 +6,7 @@ class Button extends Widget
 {
     public function draw(): void
     {
-        // TODO: Implement draw() method.
+        echo "<input type='button' value=this->key()>";
     }
     public function key(int $id): string
     {
