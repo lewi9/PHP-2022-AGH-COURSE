@@ -17,8 +17,6 @@ class FileStorage implements Storage
     {
         $dir = scandir(Directory::storage());
         for($i = 2; $i<count($dir); $i++)
-        {
             yield unserialize(file_get_contents(Directory::Storage() .$dir[$i]));
-        }
     }
 }
