@@ -7,7 +7,7 @@ class App
     public function run(): void
     {
         $storage = new \Storage\FileStorage();
-        for($i = 0; $i<5; $i++ )
+        for($i = 1; $i<=SIZE; $i++ )
         {
             $storage->store(new \Widget\Button($i));
             $storage->store(new \Widget\Link($i));

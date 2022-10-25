@@ -13,11 +13,11 @@ class FileStorage implements Storage
         $file = $distinguishable->key();
         file_put_contents(Directory::storage() . "/" . $file, $data);
     }
-    public function loadAll() : array
+    public function loadAll(): array
     {
         $distinguishable = array();
         $dir = scandir(Directory::storage());
-        for($i=3; $i <count($dir); $i++)
+        for($i=3; $i <sizeof($dir); $i++)
             $distinguishable[] = unserialize(file_get_contents(Directory::Storage() . "/". $dir[$i]));
 
 

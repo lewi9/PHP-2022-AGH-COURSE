@@ -1,5 +1,8 @@
 <?php
 
+const SIZE = 4;
+
+
 // Error reporting
 
 error_reporting(-1);
@@ -14,5 +17,7 @@ require ("../autoload.php");
 Config\Directory::set("../");
 
 // App example
+
+
 $app = new App();
 $app->run();
