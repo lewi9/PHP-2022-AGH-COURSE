@@ -16,13 +16,20 @@ class FileStorage implements Storage
     public function loadAll(): array
     {
         $distinguishable = array();
-        $dir = scandir(Directory::storage());
-        $count = 0;
+
+        //$dir = scandir(Directory::storage());
+        $dir = array_diff(scandir(Directory::storage()), array('..', '.', ".gitignore"));
+        $count = 3;
         while(isset($dir[$count]))
             $count++;
         for($i = 3; $i<$count; $i++)
-            $distinguishable[$i-3] = unserialize(file_get_contents(Directory::Storage() . "/". $dir[$i]));
+        {
+            $t = Directory::Storage() . "/". $dir[$i];
+            $tt = file_get_contents($t);
+            $distinguishable[$i-3] = unserialize($tt);
+        }
 
+        // PHP analyzer shown that is wrong
         /*for($i=3; $i <sizeof($dir); $i++)
             $distinguishable[$i-3] = unserialize(file_get_contents(Directory::Storage() . "/". $dir[$i]));*/
 
