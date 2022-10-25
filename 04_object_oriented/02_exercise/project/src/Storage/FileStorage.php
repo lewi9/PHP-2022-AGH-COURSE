@@ -30,8 +30,8 @@ class FileStorage implements Storage
                 {
                     $t = Directory::Storage() . "/". $file;
                     $tt = (string) file_get_contents($t);
-                    if(is_subclass_of(unserialize($tt),"Distinguishable"))
-                        $distinguishable[] = unserialize($tt);
+                    $ttt = unserialize($tt);
+                    $distinguishable[] = $ttt;
                 }
         }
 
