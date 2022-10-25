@@ -8,27 +8,26 @@ class Directory
 
     public static function set(string $root): void
     {
-       	// TODO: ... 
+       	static::$root = $root;
     }
-
     public static function root(): string
     {
-        return;
+        return static::$root;
     }
 
     public static function storage(): string
     {
-        return;
+        return "storage";
     }
 
     public static function view(): string
     {
-        return;
+        throw new \Error("Brak katalogu views");
     }
 
     public static function src(): string
     {
-        return;
+        return "src";
     }
 
 }
