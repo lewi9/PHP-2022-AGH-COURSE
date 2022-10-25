@@ -2,7 +2,10 @@
 
 namespace Widget;
 
-class Button
+class Button extends Widget
 {
-
+    public function draw(): void
+    {
+        // TODO: Implement draw() method.
+    }
 }

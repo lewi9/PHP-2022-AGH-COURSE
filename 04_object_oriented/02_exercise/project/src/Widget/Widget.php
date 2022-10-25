@@ -2,7 +2,7 @@
 
 namespace Widget;
 
-class Widget
+abstract class Widget
 {
-
+    public abstract function draw(): void;
 }

@@ -2,7 +2,10 @@
 
 namespace Widget;
 
-class Link
+class Link extends Widget
 {
+    public function draw(): void
+    {
 
+    }
 }
