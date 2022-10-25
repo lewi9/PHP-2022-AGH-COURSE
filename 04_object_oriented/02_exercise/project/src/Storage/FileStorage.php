@@ -31,11 +31,14 @@ class FileStorage implements Storage
                     $t = Directory::Storage() . "/". $file;
                     $tt = (string) file_get_contents($t);
                     $ttt = unserialize($tt);
-                    $distinguishable[] = $ttt;
+                    if(is_object($ttt))
+                        if(get_parent_class($ttt))
+                            if(get_parent_class($ttt) == "Widget\Widget")
+                                if(get_parent_class(get_parent_class($ttt)) == "Concept\Distinguishable")
+                                    $distinguishable[] = $ttt;
+
                 }
         }
-
-
         return $distinguishable;
     }
 }
