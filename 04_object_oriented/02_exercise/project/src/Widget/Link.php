@@ -7,6 +7,6 @@ class Link extends Widget
 
     public function draw(): void
     {
-        echo "<a href=''>$this->key()</a>";
+        echo "<a href=''>parent::key()</a>";
     }
 }

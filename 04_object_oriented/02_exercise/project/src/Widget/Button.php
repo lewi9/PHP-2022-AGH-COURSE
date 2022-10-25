@@ -6,6 +6,6 @@ class Button extends Widget
 {
     public function draw(): void
     {
-        echo "<input type='button' value=this->key()>";
+        echo "<input type='button' value=parent::key()>";
     }
 }
