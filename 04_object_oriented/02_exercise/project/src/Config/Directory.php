@@ -8,16 +8,16 @@ class Directory
 
     public static function set(string $root): void
     {
-       	static::$root = $root;
+       	self::$root = $root;
     }
     public static function root(): string
     {
-        return static::$root;
+        return self::$root;
     }
 
     public static function storage(): string
     {
-        return "../storage";
+        return "storage";
     }
 
     public static function view(): string

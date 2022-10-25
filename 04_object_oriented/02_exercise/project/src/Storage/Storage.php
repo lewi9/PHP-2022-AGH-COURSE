@@ -7,5 +7,5 @@ use Concept\Distinguishable;
 interface Storage
 {
     public function store(Distinguishable $distinguishable) : void;
-    public function loadAll(): iterable;
+    public function loadAll(): array;
 }
