@@ -6,5 +6,12 @@ abstract class Distinguishable
 {
     private int $id;
 
-    public abstract function key(int $id): string;
+    public function __construct(int $id)
+    {
+        $this->id = $id;
+    }
+    public function key(): string
+    {
+        return static::class . $this->id;
+    }
 }

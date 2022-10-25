@@ -8,8 +8,4 @@ class Button extends Widget
     {
         echo "<input type='button' value=this->key()>";
     }
-    public function key(int $id): string
-    {
-        return "widget" . static::class . $id;
-    }
 }
