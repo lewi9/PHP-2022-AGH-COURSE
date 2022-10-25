@@ -10,6 +10,6 @@ class Link extends Widget
     }
     public function key(int $id): string
     {
-        return "Widget" . static::class . $id;
+        return "widget" . static::class . $id;
     }
 }
