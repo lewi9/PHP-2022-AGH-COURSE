@@ -8,4 +8,8 @@ class Button extends Widget
     {
         // TODO: Implement draw() method.
     }
+    public function key(int $id): string
+    {
+        return "Widget" . static::class . $id;
+    }
 }
