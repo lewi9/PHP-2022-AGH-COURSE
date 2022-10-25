@@ -12,6 +12,6 @@ abstract class Distinguishable
     }
     public function key(): string
     {
-        return str_replace("\\", "_", static::class) . "_". $this->id;
+        return strtolower(str_replace("\\", "_", static::class) . "_". $this->id);
     }
 }

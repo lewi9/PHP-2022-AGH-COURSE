@@ -17,8 +17,19 @@ class FileStorage implements Storage
     {
         $distinguishable = array();
 
+        $exclude = array( ".","..",".gitignore");
+        $dir = scandir(Directory::storage());
+        foreach($dir as $file)
+            if(!in_array($file,$exclude))
+            {
+                $t = Directory::Storage() . "/". $file;
+                $tt = file_get_contents($t);
+                $distinguishable[] = unserialize($tt);
+            }
+
+
         //$dir = scandir(Directory::storage());
-        $dir = array_diff(scandir(Directory::storage()), array('..', '.', ".gitignore"));
+        /*$dir = array_diff(scandir(Directory::storage()), array('..', '.', ".gitignore"));
         $count = 3;
         while(isset($dir[$count]))
             $count++;
@@ -27,7 +38,7 @@ class FileStorage implements Storage
             $t = Directory::Storage() . "/". $dir[$i];
             $tt = file_get_contents($t);
             $distinguishable[$i-3] = unserialize($tt);
-        }
+        }*/
 
         // PHP analyzer shown that is wrong
         /*for($i=3; $i <sizeof($dir); $i++)
