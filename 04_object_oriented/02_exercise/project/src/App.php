@@ -13,7 +13,10 @@ class App
             $storage->store(new \Widget\Link($i));
         }
         foreach($storage->loadAll() as $elem)
+        {
+            if($elem instanceof Widget)
                 $this->render($elem);
+        }
 
     }
     private function render (Widget $widget): void

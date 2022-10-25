@@ -31,6 +31,7 @@ class FileStorage implements Storage
                     $t = Directory::Storage() . "/". $file;
                     $tt = (string) file_get_contents($t);
                     $ttt = unserialize($tt);
+
                     if(is_object($ttt))
                         if(get_parent_class($ttt))
                             if(get_parent_class($ttt) == "Widget\Widget")
