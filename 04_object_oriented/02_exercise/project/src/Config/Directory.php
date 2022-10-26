@@ -17,7 +17,7 @@ class Directory
 
     public static function storage(): string
     {
-        return "../storage";
+        return "../storage/";
     }
 
     public static function view(): string
@@ -27,7 +27,7 @@ class Directory
 
     public static function src(): string
     {
-        return "../src";
+        return "../src/";
     }
 
 }

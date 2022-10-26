@@ -11,7 +11,7 @@ class FileStorage implements Storage
     {
         $data = serialize($distinguishable);
         $file = $distinguishable->key();
-        file_put_contents(Directory::storage() . "/" . $file, $data);
+        file_put_contents(Directory::storage() . $file, $data);
     }
 
     /**
@@ -28,7 +28,7 @@ class FileStorage implements Storage
             foreach($dir as $file)
                 if(!in_array($file,$exclude))
                 {
-                    $t = Directory::Storage() . "/". $file;
+                    $t = Directory::Storage() . $file;
                     $tt = (string) file_get_contents($t);
                     $ttt = unserialize($tt);
 
