@@ -9,8 +9,8 @@ abstract class DataBaseStorage implements Storage
 {
     use SerializationHelpers;
 
-    public PDO $pdo;
-    public string $tableName = "objects";
+    protected PDO $pdo;
+    private string $tableName = "objects";
 
     public function __construct()
     {

@@ -8,7 +8,6 @@ use PDO;
 class SQLiteStorage extends DataBaseStorage
 {
     private string $databaseName = "db.sqlite";
-
     public function __construct()
     {
         /* if (file_exists(Directory::storage() . "SQLiteStorage/" . $this->databaseName)) {
