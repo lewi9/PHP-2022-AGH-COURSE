@@ -3,6 +3,9 @@
 namespace Storage;
 
 use Concept\Distinguishable;
+use Config\Directory;
+
+use PDO;
 
 class SQLiteStorage implements Storage
 {
@@ -13,14 +16,14 @@ class SQLiteStorage implements Storage
 
     public function __construct()
     {
-        $this->pdo = new PDO("sqlite:/tmp/sqlite.db");
+        $this->pdo = new PDO("sqlite: " . Directory::storage() . "SQLiteStorage/" ."sqlite.db");
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-    public function __destruct()
+    /*public function __destruct()
     {
-        echo shell_exec("rm -f /tmp/sqlite.db");
-    }
+        echo shell_exec("rm -f Directory::storage() . "SQLiteStorage/" ."sqlite.db");
+    }*/
 
     public function store(Distinguishable $distinguishable): void
     {
