@@ -17,9 +17,9 @@ class SQLiteStorage implements Storage
 
     public function __construct()
     {
-        if (file_exists(Directory::storage() . "SQLiteStorage/" . $this->databaseName)) {
-            echo shell_exec("rm -f " . Directory::storage() . "SQLiteStorage/" . $this->databaseName);
-        }
+        /* if (file_exists(Directory::storage() . "SQLiteStorage/" . $this->databaseName)) {
+             echo shell_exec("rm -f " . Directory::storage() . "SQLiteStorage/" . $this->databaseName);
+         }*/
         $this->pdo = new PDO("sqlite:" . Directory::storage() . "SQLiteStorage/" . $this->databaseName);
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
