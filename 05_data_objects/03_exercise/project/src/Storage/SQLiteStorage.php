@@ -17,16 +17,17 @@ class SQLiteStorage implements Storage
     public function __construct()
     {
         try {
+            $flag = false;
+            if (file_exists(Directory::storage() . "SQLiteStorage/" . "sqlite.db"))
+                $flag = true;
             $this->pdo = new PDO("sqlite:" . Directory::storage() . "SQLiteStorage/" . "sqlite.db");
-            if (file_exists(Directory::storage() . "SQLiteStorage/" . "sqlite.db")) {
+            if($flag)
+            {
                 $query = $this->pdo->query("SELECT MAX(id) FROM Storage");
                 if ($query) {
                     SQLiteStorage::$id = $query->fetchAll(PDO::FETCH_NUM)[0][0];
                 }
             }
-
-
-            echo SQLiteStorage::$id;
         } catch (\PDOException $e) {
             exit("Sqlite database cannot be created: $e");
         }
@@ -47,7 +48,6 @@ class SQLiteStorage implements Storage
         $statement->bindValue('id', ++SQLiteStorage::$id);
         $statement->bindValue('Distinguishable', $serializedDistinguishable);
         $statement->execute();
-        echo SQLiteStorage::$id . "<br>";
     }
 
     /**
