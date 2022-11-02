@@ -3,6 +3,7 @@
 namespace Storage;
 
 use Concept\Distinguishable;
+use \PDO;
 
 class MySQLStorage implements Storage
 {
@@ -46,6 +47,6 @@ class MySQLStorage implements Storage
         }
 
         return $distinguishable;
-        
+
     }
 }
