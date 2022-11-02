@@ -19,6 +19,7 @@ class MySQLStorage implements Storage
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
+    
     /*public function __destruct()
     {
         echo shell_exec("docker container stop mysql");
