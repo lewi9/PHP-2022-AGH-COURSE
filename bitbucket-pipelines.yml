@@ -6,14 +6,31 @@ pipelines:
         caches:
           - composer
           - node
+        services:
+          - mysql
         script:
-          - composer global require phpstan/phpstan
+          - composer global require friendsofphp/php-cs-fixer phpstan/phpstan sebastian/phpcpd
           - export PATH=~/.composer/vendor/bin/:$PATH
-          - pushd 04_object_oriented/02_exercise/tests/
-          -   phpstan analyze --level max ../project/
-          -   composer install
-          -   php -S localhost:8888 -t ../project/public &
-          -   vendor/bin/codecept run --xml test_report.xml
-          -   killall php
+          - pushd 05_data_objects/03_exercise
+          -   php-cs-fixer fix --diff --dry-run project/
+          -   phpstan analyze --level max project/
+          -   pushd tests/
+          -     composer install
+          -     php -S localhost:8888 -t ../project/public &
+          -     while ! timeout 1 bash -c "echo > /dev/tcp/localhost/3306"; do echo "Waiting for MySQL..."; sleep 1; done
+          -     vendor/bin/codecept run --xml test_report.xml
+          -     killall php
+          -   popd
+          -   phpcpd --fuzzy --min-lines 1 --min-tokens 10 project/
           - popd
           - .ci/collect_reports.sh
+definitions:
+  services:
+    mysql:
+      image: mysql:8.0
+      variables:
+        MYSQL_ROOT_PASSWORD: root123
+        MYSQL_ROOT_HOST: "%"
+        MYSQL_DATABASE: test
+        MYSQL_USER: test
+        MYSQL_PASSWORD: test123
