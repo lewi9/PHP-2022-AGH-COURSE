@@ -5,7 +5,6 @@ namespace Storage;
 use Config\Directory;
 use PDO;
 
-
 class SQLiteStorage extends DataBaseStorage
 {
     private string $databaseName = "db.sqlite";
@@ -23,5 +22,4 @@ class SQLiteStorage extends DataBaseStorage
     {
         echo shell_exec("rm -f " . Directory::storage() . "SQLiteStorage/" . $this->databaseName);
     }*/
-
 }

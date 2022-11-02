@@ -20,5 +20,4 @@ class MySQLStorage extends DataBaseStorage
     {
         echo shell_exec("docker container stop mysql");
     }*/
-
 }
