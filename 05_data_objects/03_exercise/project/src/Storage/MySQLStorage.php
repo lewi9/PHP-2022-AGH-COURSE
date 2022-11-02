@@ -30,11 +30,11 @@ class MySQLStorage implements Storage
 
     public function store(Distinguishable $distinguishable): void
     {
-        $this->pdo->exec("CREATE TABLE IF NOT EXISTS  $this->tableName (id INT PRIMARY KEY, Distinguishable TEXT)");
+        $this->pdo->exec("CREATE TABLE IF NOT EXISTS  $this->tableName (id INT PRIMARY KEY, data TEXT)");
         $serializedDistinguishable = serialize($distinguishable);
-        $statement = $this->pdo->prepare("INSERT INTO $this->tableName VALUES (:id, :Distinguishable)");
+        $statement = $this->pdo->prepare("INSERT INTO $this->tableName VALUES (:id, :data)");
         $statement->bindValue('id', ++$this->id);
-        $statement->bindValue('Distinguishable', $serializedDistinguishable);
+        $statement->bindValue('data', $serializedDistinguishable);
         $statement->execute();
     }
 
