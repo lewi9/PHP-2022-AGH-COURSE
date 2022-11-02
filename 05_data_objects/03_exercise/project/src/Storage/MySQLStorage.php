@@ -26,7 +26,7 @@ class MySQLStorage implements Storage
     public function store(Distinguishable $distinguishable): void
     {
         $this->pdo->exec("CREATE TABLE IF NOT EXISTS Storage (`id` INT PRIMARY KEY, `Distinguishable` TEXT)");
-        $statement = $this->pdo->prepare("INSERT INTO test VALUES (:id, :Distinguishable");
+        $statement = $this->pdo->prepare("INSERT INTO Storage VALUES (:id, :Distinguishable");
         $statement->bindValue('id', ++$this->id);
         $statement->bindValue('Distinguishable', serialize($distinguishable));
         $statement->execute();
@@ -37,6 +37,15 @@ class MySQLStorage implements Storage
      */
     public function loadAll(): array
     {
+        $distinguishable = array();
+        $query = $this->pdo->query("SELECT * FROM Storage");
+        $query->fetchAll(PDO::FETCH_NUM);
+        foreach($query as $array)
+        {
+            $distinguishable = self::deserializeAsDistinguishable($array[1]);
+        }
 
+        return $distinguishable;
+        
     }
 }
