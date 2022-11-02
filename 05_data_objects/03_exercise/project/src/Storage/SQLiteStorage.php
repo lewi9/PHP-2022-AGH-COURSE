@@ -12,29 +12,12 @@ class SQLiteStorage implements Storage
     use SerializationHelpers;
 
     private PDO $pdo;
-    private static int $id = 1;
     private string $databaseName = "db.sqlite";
     private string $tableName = "objects";
 
     public function __construct()
     {
-        try {
-            $flag = false;
-            if (file_exists(Directory::storage() . "SQLiteStorage/" . $this->databaseName)) {
-                $flag = true;
-            }
-            $this->pdo = new PDO("sqlite:" . Directory::storage() . "SQLiteStorage/" . $this->databaseName);
-            if ($flag) {
-                $query = $this->pdo->query("SELECT MAX(id) FROM $this->tableName ");
-                if ($query) {
-                    SQLiteStorage::$id = $query->fetchAll(PDO::FETCH_NUM)[0][0];
-                }
-                $flag = false;
-            }
-        } catch (\PDOException $e) {
-            exit("Sqlite database cannot be created: $e");
-        }
-
+        $this->pdo = new PDO("sqlite:" . Directory::storage() . "SQLiteStorage/" . $this->databaseName);
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
@@ -45,10 +28,10 @@ class SQLiteStorage implements Storage
 
     public function store(Distinguishable $distinguishable): void
     {
-        $this->pdo->exec("CREATE TABLE IF NOT EXISTS $this->tableName (id INTEGER PRIMARY KEY, data TEXT NOT NULL)");
-        $statement = $this->pdo->prepare("INSERT INTO $this->tableName VALUES (:id, :data)");
+        $this->pdo->exec("CREATE TABLE IF NOT EXISTS $this->tableName (key TEXT PRIMARY KEY, data TEXT NOT NULL)");
+        $statement = $this->pdo->prepare("INSERT INTO $this->tableName VALUES (:key, :data)");
         $serializedDistinguishable = serialize($distinguishable);
-        $statement->bindValue('id', ++SQLiteStorage::$id);
+        $statement->bindValue('id', $distinguishable->key());
         $statement->bindValue('data', $serializedDistinguishable);
         $statement->execute();
     }
@@ -65,7 +48,6 @@ class SQLiteStorage implements Storage
                 $distinguishable[] = self::deserializeAsDistinguishable($array[1]);
             }
         }
-
 
         return $distinguishable;
     }
