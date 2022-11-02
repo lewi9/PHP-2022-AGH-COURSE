@@ -29,7 +29,7 @@ class SQLiteStorage implements Storage
         ++$this->id;
         $serializedDistinguishable = serialize($distinguishable);
         $statement->bindValue('id', $this->id);
-        $statement->bindValue('Distinguishable', `$serializedDistinguishable`);
+        $statement->bindValue('Distinguishable', $serializedDistinguishable);
         $statement->execute();
         $this->id++;
     }

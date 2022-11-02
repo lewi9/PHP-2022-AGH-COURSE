@@ -31,9 +31,10 @@ class MySQLStorage implements Storage
 
         $serializedDistinguishable = serialize($distinguishable);
         ++$this->id;
+        echo `$serializedDistinguishable `. "<br>";
         $statement = $this->pdo->prepare("INSERT INTO Storage VALUES (:id, :Distinguishable");
         $statement->bindValue('id', $this->id);
-        $statement->bindValue('Distinguishable', `$serializedDistinguishable`);
+        $statement->bindValue('Distinguishable', $serializedDistinguishable);
         $statement->execute();
         $serializedDistinguishable = serialize($distinguishable);
         //$this->pdo->exec("INSERT INTO Storage (`id`, `Distinguishable`) VALUES ($this->id, \"$serializedDistinguishable\")");
