@@ -16,13 +16,10 @@ class SQLiteStorage implements Storage
 
     public function __construct()
     {
-
-        try
-        {
+        try {
             $this->pdo = new PDO("sqlite:" . Directory::storage() . "SQLiteStorage/" . "sqlite.db");
-        } catch (\PDOException $e)
-        {
-
+        } catch (\PDOException $e) {
+            exit("Sqlite database cannot be created: $e");
         }
 
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -51,12 +48,13 @@ class SQLiteStorage implements Storage
     {
         $distinguishable = array();
         $query = $this->pdo->query("SELECT * FROM Storage");
-        foreach($query->fetchAll(PDO::FETCH_NUM) as $array)
-        {
-            $distinguishable[] = self::deserializeAsDistinguishable($array[1]);
+        if ($query) {
+            foreach ($query->fetchAll(PDO::FETCH_NUM) as $array) {
+                $distinguishable[] = self::deserializeAsDistinguishable($array[1]);
+            }
         }
 
-        return $distinguishable;
 
+        return $distinguishable;
     }
 }

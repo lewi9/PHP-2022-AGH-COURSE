@@ -41,9 +41,10 @@ class MySQLStorage implements Storage
     {
         $distinguishable = array();
         $query = $this->pdo->query("SELECT * FROM Storage");
-        foreach($query->fetchAll(PDO::FETCH_NUM) as $array)
-        {
-            $distinguishable[] = self::deserializeAsDistinguishable($array[1]);
+        if ($query) {
+            foreach ($query->fetchAll(PDO::FETCH_NUM) as $array) {
+                $distinguishable[] = self::deserializeAsDistinguishable($array[1]);
+            }
         }
         return $distinguishable;
     }
