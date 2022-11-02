@@ -24,7 +24,14 @@ class SQLiteStorage implements Storage
 
     public function store(Distinguishable $distinguishable): void
     {
-
+        $this->pdo->exec("CREATE TABLE IF NOT EXISTS Storage (id INTEGER PRIMARY KEY, Distinguishable TEXT NOT NULL)");
+        $statement = $this->pdo->prepare("INSERT INTO Storage VALUES (:id, :Distinguishable)");
+        ++$this->id;
+        $serializedDistinguishable = serialize($distinguishable);
+        $statement->bindValue('id', $this->id);
+        $statement->bindValue('Distinguishable', `$serializedDistinguishable`);
+        $statement->execute();
+        $this->id++;
     }
 
     /**

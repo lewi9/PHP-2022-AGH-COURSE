@@ -29,11 +29,10 @@ class MySQLStorage implements Storage
         $this->pdo->exec("CREATE TABLE IF NOT EXISTS Storage (`id` INT PRIMARY KEY, `Distinguishable` TEXT)");
 
         $serializedDistinguishable = serialize($distinguishable);
-        str_replace('\'', '"', $serializedDistinguishable);
         ++$this->id;
         $statement = $this->pdo->prepare("INSERT INTO Storage VALUES (:id, :Distinguishable");
-        $statement->bindValue('id', "$this->id");
-        $statement->bindValue('Distinguishable', "$serializedDistinguishable");
+        $statement->bindValue('id', $this->id);
+        $statement->bindValue('Distinguishable', `$serializedDistinguishable`);
         $statement->execute();
         $serializedDistinguishable = serialize($distinguishable);
         //$this->pdo->exec("INSERT INTO Storage (`id`, `Distinguishable`) VALUES ($this->id, \"$serializedDistinguishable\")");
