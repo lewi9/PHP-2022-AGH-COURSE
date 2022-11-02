@@ -26,6 +26,7 @@ class MySQLStorage implements Storage
 
     public function store(Distinguishable $distinguishable): void
     {
+
         $this->pdo->exec("CREATE TABLE IF NOT EXISTS Storage (`id` INT PRIMARY KEY, `Distinguishable` TEXT)");
 
         $serializedDistinguishable = serialize($distinguishable);

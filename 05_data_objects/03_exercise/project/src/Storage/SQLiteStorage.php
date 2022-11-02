@@ -39,6 +39,15 @@ class SQLiteStorage implements Storage
      */
     public function loadAll(): array
     {
+        $distinguishable = array();
+        $query = $this->pdo->query("SELECT * FROM Storage");
+        $query->fetchAll(PDO::FETCH_NUM);
+        foreach($query as $array)
+        {
+            $distinguishable = self::deserializeAsDistinguishable($array[1]);
+        }
+
+        return $distinguishable;
 
     }
 }
