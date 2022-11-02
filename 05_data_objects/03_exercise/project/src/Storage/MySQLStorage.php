@@ -3,7 +3,7 @@
 namespace Storage;
 
 use Concept\Distinguishable;
-use \PDO;
+use PDO;
 
 class MySQLStorage implements Storage
 {
@@ -27,10 +27,12 @@ class MySQLStorage implements Storage
     public function store(Distinguishable $distinguishable): void
     {
         $this->pdo->exec("CREATE TABLE IF NOT EXISTS Storage (`id` INT PRIMARY KEY, `Distinguishable` TEXT)");
-        $statement = $this->pdo->prepare("INSERT INTO Storage VALUES (:id, :Distinguishable");
-        $statement->bindValue('id', ++$this->id);
-        $statement->bindValue('Distinguishable', serialize($distinguishable));
-        $statement->execute();
+        //$statement = $this->pdo->prepare("INSERT INTO Storage VALUES (:id, :Distinguishable");
+        //$statement->bindValue('id', ++$this->id);
+        //$statement->bindValue('Distinguishable', serialize($distinguishable));
+        //$statement->execute();
+        $serializedDistinguishable = serialize($distinguishable);
+        $this->pdo->exec("INSERT INTO Storage (`id`, `Distinguishable`) VALUES (++$this->id, $serializedDistinguishable )" );
     }
 
     /**
