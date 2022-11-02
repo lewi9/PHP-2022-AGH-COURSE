@@ -41,8 +41,7 @@ class SQLiteStorage implements Storage
     {
         $distinguishable = array();
         $query = $this->pdo->query("SELECT * FROM Storage");
-        $query->fetchAll(PDO::FETCH_NUM);
-        foreach($query as $array)
+        foreach($query->fetchAll(PDO::FETCH_NUM) as $array)
         {
             $distinguishable = self::deserializeAsDistinguishable($array[1]);
         }
