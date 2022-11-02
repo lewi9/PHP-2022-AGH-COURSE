@@ -17,6 +17,9 @@ class SQLiteStorage implements Storage
 
     public function __construct()
     {
+        if (file_exists(Directory::storage() . "SQLiteStorage/" . $this->databaseName)) {
+            echo shell_exec("rm -f " . Directory::storage() . "SQLiteStorage/" . $this->databaseName);
+        }
         $this->pdo = new PDO("sqlite:" . Directory::storage() . "SQLiteStorage/" . $this->databaseName);
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
@@ -31,7 +34,7 @@ class SQLiteStorage implements Storage
         $this->pdo->exec("CREATE TABLE IF NOT EXISTS $this->tableName (key TEXT PRIMARY KEY, data TEXT NOT NULL)");
         $statement = $this->pdo->prepare("INSERT INTO $this->tableName VALUES (:key, :data)");
         $serializedDistinguishable = serialize($distinguishable);
-        $statement->bindValue('id', $distinguishable->key());
+        $statement->bindValue('key', $distinguishable->key());
         $statement->bindValue('data', $serializedDistinguishable);
         $statement->execute();
     }
