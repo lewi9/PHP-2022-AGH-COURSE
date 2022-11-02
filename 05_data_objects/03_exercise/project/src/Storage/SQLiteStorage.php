@@ -16,23 +16,29 @@ class SQLiteStorage implements Storage
 
     public function __construct()
     {
-        $this->pdo = new PDO("sqlite:" . Directory::storage() . "SQLiteStorage/" . "sqlite.db");
+
+        try
+        {
+            $this->pdo = new PDO("sqlite:" . Directory::storage() . "SQLiteStorage/" . "sqlite.db");
+        } catch (\PDOException $e)
+        {
+
+        }
+
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     public function __destruct()
     {
-        echo "***********************************8";
-        echo shell_exec("rm -f" . Directory::storage() . "SQLiteStorage/" ."sqlite.db");
+        echo shell_exec("rm -f " . Directory::storage() . "SQLiteStorage/" ."sqlite.db");
     }
 
     public function store(Distinguishable $distinguishable): void
     {
         $this->pdo->exec("CREATE TABLE IF NOT EXISTS Storage (id INTEGER PRIMARY KEY, Distinguishable TEXT NOT NULL)");
         $statement = $this->pdo->prepare("INSERT INTO Storage VALUES (:id, :Distinguishable)");
-        ++$this->id;
         $serializedDistinguishable = serialize($distinguishable);
-        $statement->bindValue('id', $this->id);
+        $statement->bindValue('id', ++$this->id);
         $statement->bindValue('Distinguishable', $serializedDistinguishable);
         $statement->execute();
         $this->id++;
