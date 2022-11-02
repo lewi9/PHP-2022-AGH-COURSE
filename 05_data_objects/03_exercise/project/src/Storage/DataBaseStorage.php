@@ -19,7 +19,7 @@ abstract class DataBaseStorage implements Storage
 
     public function store(Distinguishable $distinguishable): void
     {
-        $this->pdo->exec("CREATE TABLE IF NOT EXISTS $this->tableName(`key` TEXT PRIMARY KEY, `data` TEXT)");
+        $this->pdo->exec("CREATE TABLE IF NOT EXISTS $this->tableName(`key` VARCHAR(255) PRIMARY KEY, `data` TEXT)");
         $serializedDistinguishable = serialize($distinguishable);
         $statement = $this->pdo->prepare("INSERT INTO $this->tableName VALUES (:key, :data)");
         $statement->bindValue('key', $distinguishable->key());
