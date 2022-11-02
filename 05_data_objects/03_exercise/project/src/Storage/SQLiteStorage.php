@@ -7,9 +7,10 @@ use Concept\Distinguishable;
 class SQLiteStorage implements Storage
 {
 
+
     public function store(Distinguishable $distinguishable): void
     {
-        // TODO: Implement store() method.
+
     }
 
     /**
@@ -17,6 +18,6 @@ class SQLiteStorage implements Storage
      */
     public function loadAll(): array
     {
-        // TODO: Implement loadAll() method.
+
     }
 }
