@@ -7,7 +7,7 @@ ini_set("display_errors", "On");
 
 // Autoload
 
-require("vendor/autoload.php");
+require("../vendor/autoload.php");
 
 // Setup directory config
 
