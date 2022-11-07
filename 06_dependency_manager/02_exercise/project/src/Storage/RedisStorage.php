@@ -28,7 +28,9 @@ class RedisStorage implements Storage
         $distinguishable = array();
         $allKeys = $this->client->keys("*");
         foreach ($allKeys as $key) {
-            $distinguishable[] = self::deserializeAsDistinguishable($this->client->get("$key"));
+            if($t = $this->client->get("$key")){
+                $distinguishable[] = self::deserializeAsDistinguishable($t);
+            }
         }
         return $distinguishable;
     }
