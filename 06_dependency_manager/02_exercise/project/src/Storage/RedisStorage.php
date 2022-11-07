@@ -6,10 +6,17 @@ use Concept\Distinguishable;
 
 class RedisStorage implements Storage
 {
+    use SerializationHelpers;
+
+    private Predis\Client $client;
+    public function __construct()
+    {
+        $this->client = new Predis\Client();
+    }
 
     public function store(Distinguishable $distinguishable): void
     {
-        // TODO: Implement store() method.
+        $this->client->set($distinguishable->key(),serialize($distinguishable));
     }
 
     /**
@@ -17,6 +24,8 @@ class RedisStorage implements Storage
      */
     public function loadAll(): array
     {
-        // TODO: Implement loadAll() method.
+        $distinguishable = []
+        $allKeys = $this->client->keys("*");
+        foreach
     }
 }
