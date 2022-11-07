@@ -1,0 +1,19 @@
+{
+    "name": "lewi9/project",
+    "description": "\"Assigment 6\"",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Lewi9\\Project\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "lewi9",
+            "email": "lewinski@student.agh.edu.pl"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
