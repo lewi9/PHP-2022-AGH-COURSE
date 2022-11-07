@@ -24,8 +24,12 @@ class RedisStorage implements Storage
      */
     public function loadAll(): array
     {
-        $distinguishable = []
+        $distinguishable = array();
         $allKeys = $this->client->keys("*");
-        foreach
+        foreach($allKeys as $key)
+        {
+            $distinguishable[] = self::deserializeAsDistinguishable($this->client->get("$key"));
+        }
+        return $distinguishable;
     }
 }
