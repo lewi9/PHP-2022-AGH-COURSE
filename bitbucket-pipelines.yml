@@ -8,20 +8,27 @@ pipelines:
           - node
         services:
           - mysql
+          - redis
         script:
           - composer global require friendsofphp/php-cs-fixer phpstan/phpstan sebastian/phpcpd
           - export PATH=~/.composer/vendor/bin/:$PATH
-          - pushd 05_data_objects/03_exercise
-          -   php-cs-fixer fix --diff --dry-run project/
-          -   phpstan analyze --level max project/
+          - pushd 06_dependency_manager/02_exercise/
+          -   pushd project/
+          -     composer install
+          -     php-cs-fixer fix --diff --dry-run .
+          -     phpstan analyze --level max public/ src/
+          -   popd
           -   pushd tests/
           -     composer install
           -     php -S localhost:8888 -t ../project/public &
+          -     while ! timeout 1 bash -c "echo > /dev/tcp/localhost/6379"; do echo "Waiting for Redis..."; sleep 1; done
           -     while ! timeout 1 bash -c "echo > /dev/tcp/localhost/3306"; do echo "Waiting for MySQL..."; sleep 1; done
           -     vendor/bin/codecept run --xml test_report.xml
           -     killall php
           -   popd
-          -   phpcpd --fuzzy --min-lines 1 --min-tokens 10 project/
+          -   pushd project/
+          -     phpcpd --fuzzy --min-lines 1 --min-tokens 10 public/ src/
+          -   popd
           - popd
           - .ci/collect_reports.sh
 definitions:
@@ -34,3 +41,5 @@ definitions:
         MYSQL_DATABASE: test
         MYSQL_USER: test
         MYSQL_PASSWORD: test123
+    redis:
+      image: redis
