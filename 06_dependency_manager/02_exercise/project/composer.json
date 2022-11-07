@@ -5,7 +5,12 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Lewi9\\Project\\": "src/"
+            "Lewi9\\Project\\": "src/",
+	    "" : "src/",
+	    "Widget" : "src/Widget/",
+	    "Storage": "src/Storage/",
+	    "Config" : "src/Config/",
+	    "Concept": "src/Concept/"
         }
     },
     "authors": [
