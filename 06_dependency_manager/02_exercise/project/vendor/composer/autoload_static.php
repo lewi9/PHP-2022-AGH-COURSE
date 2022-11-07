@@ -13,7 +13,11 @@ class ComposerStaticInit3e4e8b7bd0cdb8c209502effb142962d
         ),
         'S' => 
         array (
-            'Storage\\' => 8,
+            'Storage\\SessionStorage\\' => 23,
+            'Storage\\SQLiteStorage\\' => 22,
+            'Storage\\SQLStorage\\' => 19,
+            'Storage\\MySQLStorage\\' => 21,
+            'Storage\\FileStorage\\' => 20,
         ),
         'P' => 
         array (
@@ -35,7 +39,23 @@ class ComposerStaticInit3e4e8b7bd0cdb8c209502effb142962d
         array (
             0 => __DIR__ . '/../..' . '/src/Widget',
         ),
-        'Storage\\' => 
+        'Storage\\SessionStorage\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Storage',
+        ),
+        'Storage\\SQLiteStorage\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Storage',
+        ),
+        'Storage\\SQLStorage\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Storage',
+        ),
+        'Storage\\MySQLStorage\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Storage',
+        ),
+        'Storage\\FileStorage\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/Storage',
         ),

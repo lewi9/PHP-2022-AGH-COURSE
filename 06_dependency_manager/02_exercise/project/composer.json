@@ -8,7 +8,6 @@
             "Lewi9\\Project\\": "src/",
 	    "": "src/",
 	    "Widget\\": "src/Widget/",
-          "Storege\\Predis\\Client\\": "vendor/predis/predis/src/",
 	    "Storage\\": "src/Storage/",
 	    "Config\\": "src/Config/",
 	    "Concept\\": "src/Concept/"

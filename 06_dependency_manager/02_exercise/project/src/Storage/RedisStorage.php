@@ -3,15 +3,16 @@
 namespace Storage;
 
 use Concept\Distinguishable;
+use Predis\Client;
 
 class RedisStorage implements Storage
 {
     use SerializationHelpers;
 
-    private Predis\Client $client;
+    private Client $client;
     public function __construct()
     {
-        $this->client = new Predis\Client();
+        $this->client = new Client();
     }
 
     public function store(Distinguishable $distinguishable): void

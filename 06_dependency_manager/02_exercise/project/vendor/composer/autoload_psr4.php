@@ -7,8 +7,11 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Widget\\' => array($baseDir . '/src/Widget'),
-    'Storege\\Predis\\Client' => array($vendorDir . '/predis/predis/src'),
-    'Storage\\' => array($baseDir . '/src/Storage'),
+    'Storage\\SessionStorage\\' => array($baseDir . '/src/Storage'),
+    'Storage\\SQLiteStorage\\' => array($baseDir . '/src/Storage'),
+    'Storage\\SQLStorage\\' => array($baseDir . '/src/Storage'),
+    'Storage\\MySQLStorage\\' => array($baseDir . '/src/Storage'),
+    'Storage\\FileStorage\\' => array($baseDir . '/src/Storage'),
     'Predis\\' => array($vendorDir . '/predis/predis/src'),
     'Lewi9\\Project\\' => array($baseDir . '/src'),
     'Config\\' => array($baseDir . '/src/Config'),
