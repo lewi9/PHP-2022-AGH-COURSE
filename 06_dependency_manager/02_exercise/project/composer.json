@@ -6,7 +6,7 @@
     "autoload": {
         "psr-4": {
             "Lewi9\\Project\\": "src/",
-	    "\\": "src/",
+	    "": "src/",
 	    "Widget\\": "src/Widget/",
 	    "Storage\\": "src/Storage/",
 	    "Config\\": "src/Config/",
