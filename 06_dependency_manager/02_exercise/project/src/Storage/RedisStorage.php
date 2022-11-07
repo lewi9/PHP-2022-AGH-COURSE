@@ -16,7 +16,7 @@ class RedisStorage implements Storage
 
     public function store(Distinguishable $distinguishable): void
     {
-        $this->client->set($distinguishable->key(),serialize($distinguishable));
+        $this->client->set($distinguishable->key(), serialize($distinguishable));
     }
 
     /**
@@ -26,8 +26,7 @@ class RedisStorage implements Storage
     {
         $distinguishable = array();
         $allKeys = $this->client->keys("*");
-        foreach($allKeys as $key)
-        {
+        foreach ($allKeys as $key) {
             $distinguishable[] = self::deserializeAsDistinguishable($this->client->get("$key"));
         }
         return $distinguishable;

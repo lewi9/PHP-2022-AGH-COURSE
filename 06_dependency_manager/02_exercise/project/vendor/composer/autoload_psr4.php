@@ -6,6 +6,11 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Widget\\' => array($baseDir . '/src/Widget'),
+    'Storage\\' => array($baseDir . '/src/Storage'),
     'Predis\\' => array($vendorDir . '/predis/predis/src'),
     'Lewi9\\Project\\' => array($baseDir . '/src'),
+    'Config\\' => array($baseDir . '/src/Config'),
+    'Concept\\' => array($baseDir . '/src/Concept'),
+    '' => array($baseDir . '/src'),
 );

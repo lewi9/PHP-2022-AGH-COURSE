@@ -7,6 +7,14 @@ namespace Composer\Autoload;
 class ComposerStaticInit3e4e8b7bd0cdb8c209502effb142962d
 {
     public static $prefixLengthsPsr4 = array (
+        'W' => 
+        array (
+            'Widget\\' => 7,
+        ),
+        'S' => 
+        array (
+            'Storage\\' => 8,
+        ),
         'P' => 
         array (
             'Predis\\' => 7,
@@ -15,9 +23,22 @@ class ComposerStaticInit3e4e8b7bd0cdb8c209502effb142962d
         array (
             'Lewi9\\Project\\' => 14,
         ),
+        'C' => 
+        array (
+            'Config\\' => 7,
+            'Concept\\' => 8,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Widget\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Widget',
+        ),
+        'Storage\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Storage',
+        ),
         'Predis\\' => 
         array (
             0 => __DIR__ . '/..' . '/predis/predis/src',
@@ -26,6 +47,18 @@ class ComposerStaticInit3e4e8b7bd0cdb8c209502effb142962d
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
+        'Config\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Config',
+        ),
+        'Concept\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Concept',
+        ),
+    );
+
+    public static $fallbackDirsPsr4 = array (
+        0 => __DIR__ . '/../..' . '/src',
     );
 
     public static $classMap = array (
@@ -37,6 +70,7 @@ class ComposerStaticInit3e4e8b7bd0cdb8c209502effb142962d
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit3e4e8b7bd0cdb8c209502effb142962d::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit3e4e8b7bd0cdb8c209502effb142962d::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit3e4e8b7bd0cdb8c209502effb142962d::$fallbackDirsPsr4;
             $loader->classMap = ComposerStaticInit3e4e8b7bd0cdb8c209502effb142962d::$classMap;
 
         }, null, ClassLoader::class);

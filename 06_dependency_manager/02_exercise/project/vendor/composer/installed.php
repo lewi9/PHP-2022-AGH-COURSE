@@ -3,7 +3,7 @@
         'name' => 'lewi9/project',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '1fef54c645cf05b4428edc106a73a951609d3853',
+        'reference' => '63e35c6f9e288371b50fe1ba691bc7fa58cea9f5',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'lewi9/project' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '1fef54c645cf05b4428edc106a73a951609d3853',
+            'reference' => '63e35c6f9e288371b50fe1ba691bc7fa58cea9f5',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
