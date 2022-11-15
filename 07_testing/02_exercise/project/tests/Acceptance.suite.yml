@@ -1,0 +1,26 @@
+# Codeception Test Suite Configuration
+#
+# Suite for acceptance tests.
+# Perform tests in browser using the WebDriver or PhpBrowser.
+# If you need both WebDriver and PHPBrowser tests - create a separate suite.
+
+actor: AcceptanceTester
+modules:
+    enabled:
+        - PhpBrowser:
+              url: http://localhost:8888
+#        - WebDriver:
+#              url: http://localhost:8888
+#              browser: chrome
+        - Filesystem
+        - Asserts
+        - Db:
+              dsn: 'mysql:host=127.0.0.1;dbname=test'
+              user: 'test'
+              password: 'test123'
+        - Redis:
+              host: '127.0.0.1'
+              port: 6379
+              database: 0
+              cleanupBefore: 'test'
+step_decorators: ~

@@ -29,7 +29,7 @@ RUN wget https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.4.0
  && mkdir /opt/selenium \
  && mv selenium-server-4.4.0.jar /opt/selenium
 
-RUN wget https://chromedriver.storage.googleapis.com/105.0.5195.52/chromedriver_linux64.zip \
+RUN wget https://chromedriver.storage.googleapis.com/107.0.5304.62/chromedriver_linux64.zip \
  && unzip chromedriver_linux64.zip \
  && mv chromedriver /opt/selenium \
  && rm chromedriver_linux64.zip

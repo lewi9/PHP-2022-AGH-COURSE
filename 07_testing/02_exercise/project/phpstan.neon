@@ -1,0 +1,29 @@
+includes:
+    - vendor/spaze/phpstan-disallowed-calls/extension.neon
+parameters:
+    level: max
+    paths:
+        - .
+    excludePaths:
+        - vendor
+        - tests/Support/_generated
+    disallowedFunctionCalls:
+        - function: 'session_start()'
+          message: 'use SessionStorage instead'
+    disallowedSuperglobals:
+        - superglobal: '$_SESSION'
+          message: 'use SessionStorage instead'
+        - superglobal: '$_GET'
+          message: 'use parameters in controllers instead'
+        - superglobal: '$GLOBALS'
+          message: 'it is not needed in this exercise'
+        - superglobal: '$_SERVER'
+          message: 'it is not needed in this exercise'
+        - superglobal: '$_FILES'
+          message: 'it is not needed in this exercise'
+        - superglobal: '$_COOKIE'
+          message: 'it is not needed in this exercise'
+        - superglobal: '$_REQUEST'
+          message: 'it is not needed in this exercise'
+        - superglobal: '$_ENV'
+          message: 'it is not needed in this exercise'
