@@ -48,8 +48,8 @@ class RingBuffer
         if (!$this->full()) {
             $this->size++;
         }
-        $this->head = ($this->head+1)%$this->capacity();
         $this->arr[$this->head] = $item;
+        $this->head = ($this->head+1)%$this->capacity();
     }
 
     public function pop(): mixed
