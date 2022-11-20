@@ -21,4 +21,9 @@ class RingBuffer
     {
         return !$this->size;
     }
+
+    public function capacity(): int
+    {
+        return $this->size;
+    }
 }
