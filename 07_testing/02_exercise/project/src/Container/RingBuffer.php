@@ -24,6 +24,11 @@ class RingBuffer
 
     public function capacity(): int
     {
+        return $this->capacity;
+    }
+
+    public function size(): int
+    {
         return $this->size;
     }
 }
