@@ -43,18 +43,15 @@ class RingBuffer
     public function push(mixed $item): void
     {
         if (!$this->full()) {
-            $this->arr[++$this->tail] = $item;
+            $this->arr[$this->head++] = $item;
             $this->size++;
-        } else {
-            $this->arr[$this->tail] = $item;
-        }
     }
 
     public function pop(): mixed
     {
         if (!$this->empty()) {
             $this->size--;
-            return $this->arr[$this->tail--];
+            return $this->arr[--$this->head];
         }
         return null;
     }
@@ -65,5 +62,15 @@ class RingBuffer
             return $this->arr[$this->tail];
         }
         return null;
+    }
+
+    public function head(): mixed
+    {
+        if ($this->empty()) {
+            return null;
+        } elseif ($this->full()) {
+            return $this->arr[$this->head];
+        }
+        return $this->arr[$this->head-1];
     }
 }
