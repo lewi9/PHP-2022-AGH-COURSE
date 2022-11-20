@@ -42,12 +42,14 @@ class RingBuffer
 
     public function push(mixed $item): void
     {
-        $this->arr[$this->head++] = $item;
-        $this->size++;
-        $this->head = $this->head%$this->capacity();
         if ($this->full()) {
             $this->tail = ($this->tail+1)%$this->capacity();
         }
+        if (!$this->full()) {
+            $this->size++;
+        }
+        $this->head = ($this->head+1)%$this->capacity();
+        $this->arr[$this->head] = $item;
     }
 
     public function pop(): mixed
