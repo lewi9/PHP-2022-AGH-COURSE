@@ -76,7 +76,7 @@ class RingBuffer
     {
         if ($this->empty()) {
             return null;
-        } elseif ($this->head()-1 < 0) {
+        } elseif ($this->head-1 < 0) {
             return $this->arr[$this->capacity()-1];
         }
         return $this->arr[$this->head-1];
