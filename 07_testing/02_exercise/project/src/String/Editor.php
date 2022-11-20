@@ -37,7 +37,7 @@ class Editor
     public function censor(string $replace): Editor
     {
         $count = strlen($replace);
-        return $this->replace($replace, "*")->repeat("*", $count);
+        return $this->replace("$replace", str_repeat("*", $count));
     }
 
     public function repeat(string $repeat, int $count): Editor
