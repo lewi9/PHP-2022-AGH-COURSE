@@ -45,8 +45,7 @@ class RingBuffer
         if (!$this->full()) {
             $this->arr[++$this->tail] = $item;
             $this->size++;
-        }
-        else{
+        } else {
             $this->arr[$this->tail] = $item;
         }
     }
@@ -62,6 +61,9 @@ class RingBuffer
 
     public function tail(): mixed
     {
-        return $this->arr[$this->tail];
+        if (!$this->empty()) {
+            return $this->arr[$this->tail];
+        }
+        return null;
     }
 }
