@@ -17,5 +17,8 @@ class RingBuffer
         $this->size = 0;
     }
 
-    
+    public function empty(): bool
+    {
+        return !$this->size;
+    }
 }
