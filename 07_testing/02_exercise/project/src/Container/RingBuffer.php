@@ -8,6 +8,8 @@ class RingBuffer
     private int $head;
     private int $tail;
     private int $size;
+    /** @var array<int> */
+    private array $arr;
 
     public function __construct(int $capacity)
     {
@@ -15,6 +17,7 @@ class RingBuffer
         $this->tail = $capacity;
         $this->head = 0;
         $this->size = 0;
+        $this->arr = array();
     }
 
     public function empty(): bool
@@ -30,5 +33,14 @@ class RingBuffer
     public function size(): int
     {
         return $this->size;
+    }
+
+    public function push(int $item): void
+    {
+        if ($this->size() + 1 <= $this->capacity()) {
+            $this->arr[] = $item;
+            $this->head++;
+            $this->size++;
+        }
     }
 }
