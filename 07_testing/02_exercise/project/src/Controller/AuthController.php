@@ -2,8 +2,9 @@
 
 namespace Controller;
 
+use Concept\Distinguishable;
 use Exception as ExceptionAlias;
-use Model\Model;
+use Model\Flagi;
 use Model\User;
 use Storage\Exception\StorageException;
 
@@ -43,7 +44,7 @@ class AuthController extends Controller
     /**
      * @throws StorageException
      */
-    private function save_model(string $type, Model $user): void
+    private function save_model(string $type, Distinguishable $user): void
     {
         $storage = $this->storage($type);
 
@@ -55,13 +56,16 @@ class AuthController extends Controller
         return view('auth.confirmation_notice')->withTitle("Confirmation notice");
     }
 
+    /**
+     * @throws StorageException
+     */
     private function find_model_email(string $type, string $email): bool
     {
         $storage = $this->storage($type);
         $disting = $storage->load("model_user*");
-        foreach($disting as $user){
-            if($user instanceof Model\User){
-                if($user->email == $email){
+        foreach ($disting as $user) {
+            if ($user instanceof User) {
+                if ($user->email == $email) {
                     return true;
                 }
             }
@@ -69,22 +73,20 @@ class AuthController extends Controller
         return false;
     }
 
-    private function store_session(){
-        $storage = $this->storage('session');
-
-    }
+    /**
+     * @throws StorageException
+     */
     public function login(): Result
     {
-        if(isset($_POST["email"]) and isset($_POST["password"])){
-            if($_POST["email"] != '' and $_POST["password"] != ''){
-                if($this->find_model_email('mysql', $_POST["email"] )){
+        if (isset($_POST["email"]) and isset($_POST["password"])) {
+            if ($_POST["email"] != '' and $_POST["password"] != '') {
+                if ($this->find_model_email('mysql', $_POST["email"])) {
                     return view('auth.login')->withTitle("Login");
-                }
-                else{
+                } else {
+                    $this->save_model('session', new Flagi(1));
                     return view('home.index')->withTitle('Home');
                 }
             }
-
         }
         return view('auth.login')->withTitle("Login");
     }

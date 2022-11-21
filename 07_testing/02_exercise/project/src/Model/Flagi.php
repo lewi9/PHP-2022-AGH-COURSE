@@ -2,7 +2,7 @@
 
 namespace Model;
 
-class Flag extends Model
+class Flagi extends Model
 {
     public function __construct(int $id)
     {
