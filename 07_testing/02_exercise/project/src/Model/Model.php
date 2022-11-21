@@ -6,5 +6,4 @@ use Concept\Distinguishable;
 
 abstract class Model extends Distinguishable
 {
-
 }

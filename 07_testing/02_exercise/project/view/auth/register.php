@@ -1,7 +1,7 @@
 <h2>Register</h2>
 
 <?php
-if(isset($_POST["id"])){
+if (isset($_POST["id"])) {
     $names = array("id", "name", "surname", "email", "password", "password_confirmation");
     $flag = 0;
     $flags = array(0,0,0,0,0,0,0);
@@ -23,19 +23,18 @@ if(isset($_POST["id"])){
     if ($flag) {
         echo "<ul>";
         for ($i = 0; $i<5; ++$i) {
-            if($flags[$i]) {
+            if ($flags[$i]) {
                 echo sprintf("<li class='error'>The %s filed cannot be empty</li>", $names[$i]);
             }
         }
-        if($flags[5]) {
+        if ($flags[5]) {
             echo "<li class='error'>The password confirmation filed cannot be empty</li>";
         }
-        if($flags[6]) {
+        if ($flags[6]) {
             echo "<li class='error'>The password confirmation filed does not match the password field</li>";
         }
         echo "</ul>";
     }
-
 }
 
 ?>

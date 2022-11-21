@@ -16,18 +16,10 @@ class User extends Model
     /**
      * @throws ExceptionAlias
      */
-    public function __construct1(int $id){
-        parent::__construct($id);
-    }
-
-    public function __construct(int $id, string $name, string $surname, string $email, string $password)
+    public function __construct(int $id)
     {
         parent::__construct($id);
-        $this->password = password_hash($password, PASSWORD_DEFAULT);
         $this->confirmed = false;
         $this->token = bin2hex(random_bytes(16));
-        $this->name = $name;
-        $this->surname = $surname;
-        $this->email = $email;
     }
 }
