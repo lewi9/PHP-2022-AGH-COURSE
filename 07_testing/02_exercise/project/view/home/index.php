@@ -28,7 +28,7 @@ if (isset($flags)) {
                 $logreg = 0;
             }
 
-            if($flag->id() == 5){
+            if ($flag->id() == 5) {
                 echo "Logged out successfully!";
             }
         }

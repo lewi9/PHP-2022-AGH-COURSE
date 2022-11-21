@@ -52,7 +52,6 @@ class AuthController extends Controller
         $flag = new Flagi(1);
         $this->save_model('session', $flag);
         return redirect('/');
-
     }
 
     /**
