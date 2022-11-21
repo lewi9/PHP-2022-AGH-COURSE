@@ -27,6 +27,10 @@ if (isset($flags)) {
                 echo "<a href='/auth/logout'>Logout</a>";
                 $logreg = 0;
             }
+
+            if($flag->id() == 5){
+                echo "Logged out successfully!";
+            }
         }
     }
     if ($logreg) {

@@ -133,6 +133,8 @@ class AuthController extends Controller
     {
         $storage = $this->storage('session');
         $storage->remove('model_flagi_4');
+        $flag = new Flagi(5);
+        $this->save_model('session', $flag);
         return redirect("/");
     }
 }
