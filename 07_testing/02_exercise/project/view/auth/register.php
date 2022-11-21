@@ -14,6 +14,9 @@ if(isset($_POST["id"])){
     if (!$flags[4] and !$flags[5]) {
         if ($_POST[$names[4]] != $_POST[$names[5]]) {
             $flags[6] = 1;
+            $flag = 1;
+            $_POST[$names[4]] = '';
+            $_POST[$names[5]] = '';
         }
     }
 
