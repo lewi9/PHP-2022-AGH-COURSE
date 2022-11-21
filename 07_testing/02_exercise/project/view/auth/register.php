@@ -18,7 +18,7 @@
 
 <?php
 if (isset($flags)) {
-    echo "Hy";
+
     $names = array("id", "name", "surname", "email", "password", "password_confirmation");
     echo "<ul>";
     for ($i = 0; $i < 6; ++$i) {

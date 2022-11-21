@@ -52,7 +52,7 @@ class AuthController extends Controller
     {
         $storage = $this->storage('session');
 
-        $items = $storage->load("model_register*");
+        $items = $storage->load('model_register*');
 
         if ($items) {
             if ($items[0] instanceof Register_data) {
@@ -61,6 +61,11 @@ class AuthController extends Controller
         }
 
         return array();
+    }
+
+    private function rm_register(): void
+    {
+
     }
 
     /**
