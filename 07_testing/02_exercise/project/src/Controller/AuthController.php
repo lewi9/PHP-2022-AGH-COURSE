@@ -103,6 +103,9 @@ class AuthController extends Controller
             if ($_POST["email"] != '' and $_POST["password"] != '') {
                 if (($user = $this->findInUser('mysql', $_POST["email"], 'email'))) {
                     if (password_verify($_POST["password"], $user->password)) {
+                        if ($user->token) {
+                            return view('auth.confirmation_notice')->withTitle("Confirmation notice");
+                        }
                         return redirect('/');
                     } else {
                         $incorrect = 1;

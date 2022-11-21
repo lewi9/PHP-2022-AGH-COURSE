@@ -49,9 +49,9 @@ if (isset($_POST["id"])) {
     <label for="email">Email:</label>
     <input type="text" id="email" name="email" value="<?=$_POST["email"]?? ''?>"><br><br>
     <label for="password">Password:</label>
-    <input type="text" id="password" name="password" value="<?=$_POST["password"]?? ''?>"><br><br>
+    <input type="password" id="password" name="password" value="<?=$_POST["password"]?? ''?>"><br><br>
     <label for="password_confirmation">Password confirmation:</label>
-    <input type="text" id="password_confirmation" name=password_confirmation value="<?=$_POST["password_confirmation"]?? ''?>"><br><br>
+    <input type="password" id="password_confirmation" name=password_confirmation value="<?=$_POST["password_confirmation"]?? ''?>"><br><br>
     <input type="submit" value="Create">
 
 </form>
