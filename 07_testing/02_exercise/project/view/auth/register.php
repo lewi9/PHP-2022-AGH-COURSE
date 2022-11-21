@@ -1,5 +1,5 @@
 <h2>Register</h2>
-<form method="post">
+<form method="post" action="/auth/confirmation_notice">
     <label for="id">Id:</label>
     <input type="text" id="id" name="id"><br><br>
     <label for="name">Name:</label>
@@ -13,4 +13,5 @@
     <label for="password_confirmation">Password confirmation:</label>
     <input type="text" id="password_confirmation" name=password_confirmation><br><br>
     <input type="submit" value="Create">
+
 </form>
