@@ -29,14 +29,25 @@ class AuthController extends Controller
         $storage->store($user);
     }
 
+    private function validate(): void
+    {
+        $storage = $this->storage("session");
+        foreach($_POST as $field)
+        {
+            $storage->$store
+        }
+    }
+
     /**
      * @throws StorageException
      * @throws ExceptionAlias
      */
     public function confirmation_notice(): Result
     {
-        $this->save_user("sqlite", new User((int) $_POST["id"], $_POST["name"], $_POST["surname"], $_POST["email"], $_POST["password"]));
-        $this->save_user("mysql", new User((int) $_POST["id"], $_POST["name"], $_POST["surname"], $_POST["email"], $_POST["password"]));
+        $user = new User((int) $_POST["id"], $_POST["name"], $_POST["surname"], $_POST["email"], $_POST["password"]);
+        $this->save_user("sqlite",$user );
+        $this->save_user("mysql", $user );
+        $this->save_user("session", $user );
         return view('auth.confirmation_notice')->withTitle("Confirmation notice");
     }
 }
