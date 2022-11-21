@@ -35,9 +35,9 @@ class AuthController extends Controller
         return view('auth.register')->withTitle("Register");
     }
 
-    public function confirm(): Result
+    public function confirm(string $token): Result
     {
-        return view('home.index')->withTitle("Home")->withLocation("/");
+        return view("home.InvalidToken")->withLocation("/InvalidToken");
     }
 
     /**
