@@ -1,5 +1,5 @@
 <h2>Register</h2>
-<form>
+<form method="post">
     <label for="id">Id:</label>
     <input type="text" id="id" name="id"><br><br>
     <label for="name">Name:</label>
