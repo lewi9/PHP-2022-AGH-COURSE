@@ -1,4 +1,30 @@
 <h2>Register</h2>
+
+<?php
+$names = array("id", "name", "surname", "email", "password", "password_confirmation");
+$flag = 0;
+$flags = array(0,0,0,0,0,0,0);
+for ($i = 0; $i<6; $i++) {
+    if (!$_POST[$names[$i]]) {
+        $flag = 1;
+        $flags[$i] = 1;
+    }
+}
+if (!($flags[4] or $flags[5])) {
+    if ($flags[4] != $flags[5]) {
+        $flags[6] = 1;
+    }
+}
+
+if($flag){
+    echo "<ul>";
+    for($i = 0; $i<6; ++$i){
+        
+    }
+}
+
+?>
+
 <form method="post" action="/auth/confirmation_notice">
     <label for="id">Id:</label>
     <input type="text" id="id" name="id" value="<?=$_POST["id"]?>"><br><br>
