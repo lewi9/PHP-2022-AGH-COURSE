@@ -104,7 +104,7 @@ class AuthController extends Controller
                 if (($user = $this->findInUser('mysql', $_POST["email"], 'email'))) {
                     if (password_verify($_POST["password"], $user->password)) {
                         if ($user->token) {
-                            return view('auth.confirmation_notice')->withTitle("Confirmation notice");
+                            return view('auth.confirmation_notice')->withTitle("Confirmation notice")->withLocation("/auth/confirmation_notice");
                         }
                         return redirect('/');
                     } else {
