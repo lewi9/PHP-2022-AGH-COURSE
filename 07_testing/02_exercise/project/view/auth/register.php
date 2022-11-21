@@ -11,7 +11,7 @@ if(isset($_POST["id"])){
             $flags[$i] = 1;
         }
     }
-    if (!($flags[4] or $flags[5])) {
+    if (!$flags[4] and !$flags[5]) {
         if ($_POST[$names[4]] != $_POST[$names[5]]) {
             $flags[6] = 1;
         }
@@ -19,8 +19,13 @@ if(isset($_POST["id"])){
 
     if ($flag) {
         echo "<ul>";
-        for ($i = 0; $i<6; ++$i) {
-            echo sprintf("<li class='error'>The %s filed cannot be empty</li>", $names[$i]);
+        for ($i = 0; $i<5; ++$i) {
+            if($flags[$i]) {
+                echo sprintf("<li class='error'>The %s filed cannot be empty</li>", $names[$i]);
+            }
+        }
+        if($flags[5]) {
+            echo "<li class='error'>The password confirmation filed cannot be empty</li>";
         }
         if($flags[6]) {
             echo "<li class='error'>The password confirmation filed does not match the password field</li>";

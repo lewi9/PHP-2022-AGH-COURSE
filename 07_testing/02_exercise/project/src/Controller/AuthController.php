@@ -16,12 +16,16 @@ class AuthController extends Controller
 
     /**
      * @throws StorageException
+     * @throws ExceptionAlias
      */
     public function register(): Result
     {
-        if(isset($_POST["id"])) {
-            if(!(!$_POST["id"] or !$_POST["name"] or !$_POST["surname"] or !$_POST["email"] or !$_POST["password"] or !$_POST["password_confirmation"] or $_POST["password"] != $_POST["password_confirmation"])) {
-                return redirect("/auth/register");
+        if (isset($_POST["id"])) {
+            if (!(!$_POST["id"] or !$_POST["name"] or !$_POST["surname"] or !$_POST["email"] or !$_POST["password"] or !$_POST["password_confirmation"] or $_POST["password"] != $_POST["password_confirmation"])) {
+                $user = new User((int) $_POST["id"], $_POST["name"], $_POST["surname"], $_POST["email"], $_POST["password"]);
+                $this->save_model("sqlite", $user);
+                $this->save_model("mysql", $user);
+                return view('auth.confirmation_notice')->withTitle("Confirmation notice")->withLocation('/auth/confirmation_notice');
             }
         }
 
@@ -38,15 +42,8 @@ class AuthController extends Controller
         $storage->store($user);
     }
 
-    /**
-     * @throws StorageException
-     * @throws ExceptionAlias
-     */
     public function confirmation_notice(): Result
     {
-        $user = new User((int) $_POST["id"], $_POST["name"], $_POST["surname"], $_POST["email"], $_POST["password"]);
-        $this->save_model("sqlite", $user);
-        $this->save_model("mysql", $user);
         return view('auth.confirmation_notice')->withTitle("Confirmation notice");
     }
 }
