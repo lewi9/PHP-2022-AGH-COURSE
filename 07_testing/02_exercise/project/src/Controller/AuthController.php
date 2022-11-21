@@ -83,8 +83,8 @@ class AuthController extends Controller
                 if ($this->find_model_email('mysql', $_POST["email"])) {
                     return view('auth.login')->withTitle("Login");
                 } else {
-                    $this->save_model('session', new Flagi(1));
-                    return view('home.index')->withTitle('Home');
+                    $this->save_model('session', new Flagi(2));
+                    return redirect('/');
                 }
             }
         }
