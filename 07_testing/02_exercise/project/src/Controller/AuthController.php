@@ -36,18 +36,23 @@ class AuthController extends Controller
         return view('auth.register')->withTitle("Register");
     }
 
+    /**
+     * @throws StorageException
+     */
     public function confirm(string $token): Result
     {
-
-        if($user = $this->findInUser($token)){
-
-        }
-        else{
+        if ($user = $this->findInUser('mysql', $token, 'token')) {
+            $flag = new Flagi(3);
+            $this->save_model('session', $flag);
+            $user->confirmed = true;
+            $user->token = null;
+            $this->save_model("mysql", $user);
+            return redirect('/');
+        } else {
             $flag = new Flagi(1);
             $this->save_model('session', $flag);
             return redirect('/');
         }
-        return redirect('/');
     }
 
     /**
@@ -76,6 +81,11 @@ class AuthController extends Controller
             if ($user instanceof User) {
                 if ($field == "email") {
                     if ($user->email == $string) {
+                        return $user;
+                    }
+                }
+                if ($field == "token") {
+                    if ($user->token == $string) {
                         return $user;
                     }
                 }
