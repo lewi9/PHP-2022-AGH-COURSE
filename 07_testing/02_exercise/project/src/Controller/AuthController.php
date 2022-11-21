@@ -8,7 +8,10 @@ use Storage\Exception\StorageException;
 
 class AuthController extends Controller
 {
-    private array $flags = array(0, 0, 0, 0, 0, 0, 0, 0);
+    /**
+     * @var array|int[]
+     */
+    private array $flags;
     private int $validated;
     public function index(): Result
     {
@@ -17,10 +20,10 @@ class AuthController extends Controller
 
     public function register(): Result
     {
-        if($validated) {
-            return
+        if ($this->validated) {
+            return view('auth.register')->withTitle("Register")->with('flags', $this->flags);
         }
-        return view('auth.register')->withTitle("Register")->;
+        return view('auth.register')->withTitle("Register");
     }
 
     /**
