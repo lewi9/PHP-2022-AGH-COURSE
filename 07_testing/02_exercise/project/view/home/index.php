@@ -30,10 +30,10 @@ if (isset($flags)) {
         }
     }
     if ($logreg) {
-        echo "<a href='/auth/login>Login</a>";
+        echo "<a href='/auth/login'>Login</a>";
         echo "<a href='/auth/register'>Register</a>";
     }
 } else {
-    echo "<a href='/auth/login>Login</a>";
+    echo "<a href='/auth/login'>Login</a>";
     echo "<a href='/auth/register'>Register</a>";
 }
