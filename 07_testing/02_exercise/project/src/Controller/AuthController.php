@@ -48,11 +48,11 @@ class AuthController extends Controller
             $user->token = null;
             $this->save_model("mysql", $user);
             return redirect('/');
-        } else {
-            $flag = new Flagi(1);
-            $this->save_model('session', $flag);
-            return redirect('/');
         }
+        $flag = new Flagi(1);
+        $this->save_model('session', $flag);
+        return redirect('/');
+
     }
 
     /**
