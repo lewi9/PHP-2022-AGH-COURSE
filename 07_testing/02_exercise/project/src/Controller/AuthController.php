@@ -59,18 +59,20 @@ class AuthController extends Controller
     /**
      * @throws StorageException
      */
-    private function find_model_email(string $type, string $email): bool
+    private function findInUser(string $type, string $string, string $field): User|null
     {
         $storage = $this->storage($type);
         $disting = $storage->load("model_user*");
         foreach ($disting as $user) {
             if ($user instanceof User) {
-                if ($user->email == $email) {
-                    return true;
+                if ($field == "email") {
+                    if ($user->email == $string) {
+                        return $user;
+                    }
                 }
             }
         }
-        return false;
+        return null;
     }
 
     /**
@@ -80,12 +82,17 @@ class AuthController extends Controller
     {
         if (isset($_POST["email"]) and isset($_POST["password"])) {
             if ($_POST["email"] != '' and $_POST["password"] != '') {
-                if ($this->find_model_email('mysql', $_POST["email"])) {
-                    return view('auth.login')->withTitle("Login");
+                if (($user = $this->findInUser('mysql', $_POST["email"], 'email'))) {
+                    if (password_verify($_POST["password"], $user->password)) {
+                        return redirect('/');
+                    } else {
+                        $incorrect = 1;
+                        return view('auth.login')->withTitle("Login")->with('incorrect', $incorrect);
+                    }
                 } else {
                     $flag = new Flagi(2);
-                    $flag->email = $_POST["email"];
-                    $this->save_model('session', $flag );
+                    $flag->email = "'" . $_POST["email"] ."'";
+                    $this->save_model('session', $flag);
                     return redirect('/');
                 }
             }

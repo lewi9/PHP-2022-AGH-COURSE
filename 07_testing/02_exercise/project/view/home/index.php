@@ -8,7 +8,7 @@ if (isset($flags)) {
     foreach ($flags as $flag) {
         if ($flag instanceof \Model\Flagi) {
             if ($flag->id() == 2) {
-                echo "<li class='error'>Email \'$flag->email\' does not exist!</li>";
+                echo "<li class='error'>Email $flag->email does not exist!</li>";
             }
         }
     }
