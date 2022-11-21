@@ -126,6 +126,9 @@ class AuthController extends Controller
         return view('auth.login')->withTitle("Login");
     }
 
+    /**
+     * @throws StorageException
+     */
     public function logout(): Result
     {
         $storage = $this->storage('session');
