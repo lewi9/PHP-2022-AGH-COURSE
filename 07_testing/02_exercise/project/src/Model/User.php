@@ -24,6 +24,6 @@ class User extends Model
         $this->email = $email;
         $this->confirmed = false;
         $this->password = password_hash($password, PASSWORD_DEFAULT);
-        $this->token = bin2hex(random_bytes(32));
+        $this->token = bin2hex(random_bytes(16));
     }
 }
