@@ -27,7 +27,7 @@ class HomeController extends Controller
         $flags = $storage->load("model_flagi*");
         foreach ($flags as $flag) {
             if ($flag instanceof Distinguishable) {
-                if($flag->id() != 4) {
+                if ($flag->id() != 4) {
                     $storage->remove($flag->key());
                 }
             }
