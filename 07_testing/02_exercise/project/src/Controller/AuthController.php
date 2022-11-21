@@ -15,9 +15,22 @@ class AuthController extends Controller
         return view('auth.index')->withTitle("Auth");
     }
 
+    /**
+     * @throws StorageException
+     */
     public function register(): Result
     {
-        //$this->check();
+        $flags = $this->flags();
+        if ($flags) {
+            if ($flags[0] instanceof Register_data) {
+                $flags = $flags[0]->check();
+                foreach ($flags as $flag) {
+                    if ($flag) {
+                        return view('auth.register')->withTitle("Register")->with('flags', $flags);
+                    }
+                }
+            }
+        }
         return view('auth.register')->withTitle("Register");
     }
 
@@ -31,11 +44,23 @@ class AuthController extends Controller
         $storage->store($user);
     }
 
-    private function validate(): void
+    /**
+     * @throws StorageException
+     * @return mixed[]
+     */
+    private function flags(): array
     {
         $storage = $this->storage('session');
 
-        $item = $storage->load("register_*");
+        $items = $storage->load("model_register*");
+
+        if ($items) {
+            if ($items[0] instanceof Register_data) {
+                return $items[0]->check();
+            }
+        }
+
+        return array();
     }
 
     /**
@@ -46,6 +71,15 @@ class AuthController extends Controller
     {
         $register_data = new Register_data($_POST["id"], $_POST["name"], $_POST["surname"], $_POST["email"], $_POST["password"], $_POST["password_confirmation"]);
         $this->save_model("session", $register_data);
+        $flags = $this->flags();
+        if ($flags[0] instanceof Register_data) {
+            $flags = $flags[0]->check();
+            foreach ($flags as $flag) {
+                if ($flag) {
+                    return redirect('/auth/register');
+                }
+            }
+        }
         $user = new User((int) $_POST["id"], $_POST["name"], $_POST["surname"], $_POST["email"], $_POST["password"]);
         $this->save_model("sqlite", $user);
         $this->save_model("mysql", $user);

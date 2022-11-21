@@ -17,14 +17,17 @@
 </form>
 
 <?php
-echo isset($flags);
 if (isset($flags)) {
+    echo "Hy";
     $names = array("id", "name", "surname", "email", "password", "password_confirmation");
     echo "<ul>";
     for ($i = 0; $i < 6; ++$i) {
         if ($flags[$i]) {
             echo "<li class='error'>" . "The " . $names[$i] . " filed cannot be empty" . "</li>";
         }
+    }
+    if ($flags[6]) {
+        echo "<li class='error'>The password confirmation filed does not match the password field</li>";
     }
     echo "</ul>";
 }

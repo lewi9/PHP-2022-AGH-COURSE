@@ -26,10 +26,10 @@ class Register_data extends Model
     public function check(): array
     {
         $check = array(0,0,0,0,0,0,0);
-        if (!$this->was_id) {
+        if ($this->was_id) {
             $check[0] = 1;
         }
-        if ($this->name == '') {
+        if (!$this->name) {
             $check[1] = 1;
         }
         if ($this->surname == '') {
