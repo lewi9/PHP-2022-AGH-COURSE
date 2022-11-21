@@ -54,4 +54,9 @@ class AuthController extends Controller
     {
         return view('auth.confirmation_notice')->withTitle("Confirmation notice");
     }
+
+    public function login(): Result
+    {
+        return view('auth.login')->withTitle("Login")
+    }
 }

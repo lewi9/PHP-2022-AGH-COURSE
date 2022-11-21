@@ -8,9 +8,4 @@ class HomeController extends Controller
     {
         return view('home.index')->withTitle('Homepage');
     }
-
-    public function invalidToken(): Result
-    {
-        return view("home.invalidToken");
-    }
 }
