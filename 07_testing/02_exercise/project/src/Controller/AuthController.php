@@ -12,7 +12,7 @@ class AuthController extends Controller
 {
     public function index(): Result
     {
-        return view('auth.index')->withTitle("Auth");
+        return redirect('/auth/login');
     }
 
     /**
@@ -30,7 +30,7 @@ class AuthController extends Controller
                 $user->password = password_hash($_POST["password"], PASSWORD_DEFAULT);
                 //$this->save_model("sqlite", $user);
                 $this->save_model("mysql", $user);
-                return view('auth.confirmation_notice')->withTitle("Confirmation notice")->withLocation('/auth/confirmation_notice');
+                return redirect('/auth/confirmation_notice');
             }
         }
         return view('auth.register')->withTitle("Register");
@@ -104,7 +104,7 @@ class AuthController extends Controller
                 if (($user = $this->findInUser('mysql', $_POST["email"], 'email'))) {
                     if (password_verify($_POST["password"], $user->password)) {
                         if ($user->token) {
-                            return redirect("/auth/confirmation_notice")->withTitle("Confirmation notice");
+                            return redirect("/auth/confirmation_notice");
                         }
                         $flag = new Flagi(4);
                         $flag->name = $user->name;
@@ -130,6 +130,6 @@ class AuthController extends Controller
     {
         $storage = $this->storage('session');
         $storage->remove('model_flagi_4');
-        return redirect("/")
+        return redirect("/");
     }
 }
