@@ -7,10 +7,10 @@ if (isset($flags)) {
     echo '<ul>';
     foreach ($flags as $flag) {
         if ($flag instanceof \Model\Flagi) {
-            if($flag->id() == 1){
+            if ($flag->id() == 1) {
                 echo "<li class='error'>Provided token is invalid!</li>";
             }
-            if($flag->id() == 3){
+            if ($flag->id() == 3) {
                 echo "<li class='info'>Email successfully confirmed!</li>";
             }
             if ($flag->id() == 2) {
