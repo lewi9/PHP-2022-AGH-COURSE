@@ -27,7 +27,7 @@ class AuthController extends Controller
                 $user->surname = $_POST["surname"];
                 $user->email = $_POST["email"];
                 $user->password = password_hash($_POST["password"], PASSWORD_DEFAULT);
-                $this->save_model("sqlite", $user);
+                //$this->save_model("sqlite", $user);
                 $this->save_model("mysql", $user);
                 return view('auth.confirmation_notice')->withTitle("Confirmation notice")->withLocation('/auth/confirmation_notice');
             }
@@ -55,8 +55,37 @@ class AuthController extends Controller
         return view('auth.confirmation_notice')->withTitle("Confirmation notice");
     }
 
+    private function find_model_email(string $type, string $email): bool
+    {
+        $storage = $this->storage($type);
+        $disting = $storage->load("model_user*");
+        foreach($disting as $user){
+            if($user instanceof Model\User){
+                if($user->email == $email){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private function store_session(){
+        $storage = $this->storage('session');
+
+    }
     public function login(): Result
     {
-        return view('auth.login')->withTitle("Login")
+        if(isset($_POST["email"]) and isset($_POST["password"])){
+            if($_POST["email"] != '' and $_POST["password"] != ''){
+                if($this->find_model_email('mysql', $_POST["email"] )){
+                    return view('auth.login')->withTitle("Login");
+                }
+                else{
+                    return view('home.index')->withTitle('Home');
+                }
+            }
+
+        }
+        return view('auth.login')->withTitle("Login");
     }
 }
