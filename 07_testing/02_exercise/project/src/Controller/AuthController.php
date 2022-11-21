@@ -31,11 +31,7 @@ class AuthController extends Controller
 
     private function validate(): void
     {
-        $storage = $this->storage("session");
-        foreach($_POST as $field)
-        {
-            $storage->$store
-        }
+        $storage
     }
 
     /**
