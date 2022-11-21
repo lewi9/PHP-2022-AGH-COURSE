@@ -1,6 +1,4 @@
 <h1 class="welcome">Welcome on homepage!</h1>
-<a href="/auth/login">Login</a>
-<a href="/auth/register">Register</a>
 
 <?php
 if (isset($flags)) {
@@ -15,6 +13,14 @@ if (isset($flags)) {
             }
             if ($flag->id() == 2) {
                 echo "<li class='error'>Email $flag->email does not exist!</li>";
+            }
+            if ($flag->id() == 4) {
+                echo "Welcome back " . $flag->name . "!";
+                echo "<h3 class='user'>$flag->name $flag->surname</h3>";
+                echo "<a href='/auth/logout'>Logout</a>";
+            } else {
+                echo "<a href='/auth/login>Login</a>";
+                echo "<a href='/auth/register'>Register</a>";
             }
         }
     }

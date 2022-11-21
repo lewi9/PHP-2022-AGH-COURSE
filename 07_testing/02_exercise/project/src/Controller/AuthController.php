@@ -104,8 +104,12 @@ class AuthController extends Controller
                 if (($user = $this->findInUser('mysql', $_POST["email"], 'email'))) {
                     if (password_verify($_POST["password"], $user->password)) {
                         if ($user->token) {
-                            return view('auth.confirmation_notice')->withTitle("Confirmation notice")->withLocation("/auth/confirmation_notice");
+                            return redirect("/auth/confirmation_notice")->withTitle("Confirmation notice");
                         }
+                        $flag = new Flagi(4);
+                        $flag->name = $user->name;
+                        $flag->surname = $user->surname;
+                        $this->save_model('session', $flag);
                         return redirect('/');
                     } else {
                         $incorrect = 1;
@@ -120,5 +124,12 @@ class AuthController extends Controller
             }
         }
         return view('auth.login')->withTitle("Login");
+    }
+
+    public function logout(): Result
+    {
+        $storage = $this->storage('session');
+        $storage->remove('model_flagi_4');
+        return redirect("/")
     }
 }
