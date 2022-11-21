@@ -18,4 +18,36 @@ class Register_data extends Model
         $this->password = $password;
         $this->password_confirmed = $password_confirmed;
     }
+
+
+    /**
+     * @return int[]
+     */
+    public function check(): array
+    {
+        $check = array(0,0,0,0,0,0,0);
+        if (!$this->was_id) {
+            $check[0] = 1;
+        }
+        if ($this->name == '') {
+            $check[1] = 1;
+        }
+        if ($this->surname == '') {
+            $check[2] = 1;
+        }
+        if ($this->email == '') {
+            $check[3] = 1;
+        }
+        if ($this->password== '') {
+            $check[4] = 1;
+        }
+        if ($this->password_confirmed == '') {
+            $check[5] = 1;
+        }
+        if ($this->password != $this->password_confirmed) {
+            $check[6] = 1;
+        }
+
+        return $check;
+    }
 }
