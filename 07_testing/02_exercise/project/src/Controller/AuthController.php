@@ -38,7 +38,16 @@ class AuthController extends Controller
 
     public function confirm(string $token): Result
     {
-        return view("home.InvalidToken")->withLocation("/InvalidToken");
+
+        if($user = $this->findInUser($token)){
+
+        }
+        else{
+            $flag = new Flagi(1);
+            $this->save_model('session', $flag);
+            return redirect('/');
+        }
+        return redirect('/');
     }
 
     /**
