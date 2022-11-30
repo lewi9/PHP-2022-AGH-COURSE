@@ -8,22 +8,26 @@ pipelines:
           - node
         services:
           - mysql
-          - redis
         script:
-          - pushd 07_testing/02_exercise/project
+          - pushd 08_laravel/02_exercise/project/
           -   composer install
+          -   cp .env.example .env
+          -   php artisan key:generate
+          -   while ! timeout 1 bash -c "echo > /dev/tcp/localhost/3306"; do echo "Waiting for MySQL..."; sleep 1; done
+          -   php artisan migrate:fresh
+          -   php artisan db:seed
+          -   mysqldump -h127.0.0.1 -u root --password=root123 test > tests_codeception/_data/dump.sql
+          -   npm install
+          -   npm run build
+          -   php artisan serve --port 8888 &
+          -   while ! timeout 1 bash -c "echo > /dev/tcp/localhost/8888"; do echo "Waiting for server..."; sleep 1; done
+          -   vendor/bin/codecept run
+          -   vendor/bin/codecept run --xml test_report.xml
+          -   killall php php8.1
           -   vendor/bin/codecept build
           -   vendor/bin/php-cs-fixer fix --diff --dry-run .
           -   vendor/bin/phpstan analyze -c phpstan.neon
-          -   vendor/bin/phpcpd . --fuzzy --min-lines 1 --min-tokens 20 --exclude vendor --exclude tests
-          -   vendor/bin/codecept run Unit
-          -   php -S localhost:8888 -t ../project/public &
-          -   while ! timeout 1 bash -c "echo > /dev/tcp/localhost/6379"; do echo "Waiting for Redis..."; sleep 1; done
-          -   while ! timeout 1 bash -c "echo > /dev/tcp/localhost/3306"; do echo "Waiting for MySQL..."; sleep 1; done
-          -   while ! timeout 1 bash -c "echo > /dev/tcp/localhost/8888"; do echo "Waiting for App..."; sleep 1; done
-          -   vendor/bin/codecept run Acceptance
-          -   vendor/bin/codecept run Acceptance --xml test_report.xml
-          -   killall php
+          -   vendor/bin/phpcpd . --fuzzy --min-lines 1 --min-tokens 20 --exclude vendor --exclude tests* --exclude config
           - popd
           - .ci/collect_reports.sh
 definitions:
@@ -36,5 +40,3 @@ definitions:
         MYSQL_DATABASE: test
         MYSQL_USER: test
         MYSQL_PASSWORD: test123
-    redis:
-      image: redis
