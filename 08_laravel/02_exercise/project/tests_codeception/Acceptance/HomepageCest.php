@@ -17,7 +17,7 @@ class HomepageCest
         $I->seeLink("Documentation", "https://laravel.com/docs");
         $I->seeLink("Laracasts", "https://laracasts.com");
         $I->seeLink("Forge", "https://forge.laravel.com");
-        
+
         $I->dontSeeInDatabase('users');
     }
 }
