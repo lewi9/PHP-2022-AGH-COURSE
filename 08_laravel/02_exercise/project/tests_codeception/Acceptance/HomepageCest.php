@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Acceptance;
+namespace TestsCodeception\Acceptance;
 
-use Tests\Support\AcceptanceTester;
+use TestsCodeception\Support\AcceptanceTester;
 
 class HomepageCest
 {
-    public function tryToTest(AcceptanceTester $I)
+    public function tryToTest(AcceptanceTester $I): void
     {
         $I->wantTo('see Laravel links on homepage');
 
