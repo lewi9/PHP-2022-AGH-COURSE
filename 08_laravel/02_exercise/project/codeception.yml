@@ -1,4 +1,4 @@
-namespace: Tests
+namespace: TestsCodeception
 support_namespace: Support
 paths:
     tests: tests_codeception
