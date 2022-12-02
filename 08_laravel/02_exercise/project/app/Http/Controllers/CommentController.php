@@ -9,7 +9,7 @@ class CommentController extends Controller
 {
     public function index()
     {
-        $comments = Comment::findOrFail(1);
+        $comments = Comment::all();
         return view('index')->with('comments', $comments);
     }
 
