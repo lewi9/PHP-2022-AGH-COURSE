@@ -13,9 +13,9 @@ class CommentController extends Controller
         return view('index')->with('comments', $comments);
     }
 
-    public function comment($title)
+    public function comment($id)
     {
-        $comment = Comment::where('title', $title)->get();
+        $comment = Comment::where('id', $id)->get();
         return view('index')->with('comment', $comment);
     }
 }
