@@ -2,8 +2,10 @@
 
 <?php
 if (isset($comments)) {
-    foreach ($comments as $comment) {
-        echo "<a href='/comments/'".$comment->id."'>$comment->title</a>";
+    foreach ($comments as $com) {
+        if ($com instanceof \App\Models\Comment) {
+            echo "<a href='/comments/'".$com->id."'>$com->title</a>";
+        }
     }
 }
 
