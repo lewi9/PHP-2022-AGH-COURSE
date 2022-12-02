@@ -4,7 +4,7 @@
 if (isset($comments)) {
     foreach ($comments as $com) {
         if ($com instanceof \App\Models\Comment) {
-            echo "<a href='/comments/'".$com->id."'>$com->title</a>";
+            echo "<a href='/comments/".$com->id."'>$com->title</a>";
         }
     }
 }
