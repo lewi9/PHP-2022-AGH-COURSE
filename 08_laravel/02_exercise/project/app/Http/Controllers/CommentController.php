@@ -15,7 +15,7 @@ class CommentController extends Controller
 
     public function comment($title)
     {
-        $comment = Comment::where('title', $title)->first();
+        $comment = Comment::where('title', $title)->get();
         return view('index')->with('comment', $comment);
     }
 }
