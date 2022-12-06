@@ -12,4 +12,9 @@ class BookController extends Controller
     {
         return view('books.index')->with('books', Book::all());
     }
+
+    public function create(): View
+    {
+        return view('books.create');
+    }
 }

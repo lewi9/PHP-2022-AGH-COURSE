@@ -16,11 +16,12 @@
                                 <a href="{{ route('comments.show', $book) }}">{{ $book->title }}</a>
                             </dt>
                             <dd class="text-lg font-semibold">
-                                @markdown($book->text)
+                                @markdown($book->isbn)
                             </dd>
                         </div>
                     @endforeach
                 @endif
+                <a href="{{route('books.create')}}">Create</a>;
             </dl>
         </div>
     </div>
