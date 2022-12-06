@@ -30,6 +30,13 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::resource('books', \App\Http\Controllers\BookController::class)->middleware(['auth']);
+Route::middleware('auth')->group(function () {
+    Route::get('/books', [\App\Http\Controllers\BookController::class, 'index'])->name('books.index');
+    Route::get('/books/create', [\App\Http\Controllers\BookController::class, 'create'])->name('books.create');
+    Route::post('/books', [\App\Http\Controllers\BookController::class, 'store']);
+
+});
+
+
 
 Route::resource('comments', \App\Http\Controllers\CommentController::class);

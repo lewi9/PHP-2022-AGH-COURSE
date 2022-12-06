@@ -26,6 +26,7 @@ class BookController extends Controller
             'title' => ['required', 'string'],
             'description' => ['required', 'string'],
         ]);
+
         Book::create([
             'isbn' => $request->isbn,
             'title' => $request->title,
