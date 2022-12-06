@@ -30,6 +30,7 @@
                 <x-text-input id="description" class="block mt-1 w-full"
                               type="text"
                               name="description"
+                              :value="old('description')"
                               required />
 
                 <x-input-error :messages="$errors->get('description')" class="mt-2" />

@@ -22,7 +22,7 @@ class BookController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'isbn' => ['required', 'string' 'digits:13', 'unique:' . Book::class],
+            'isbn' => ['required', 'string', 'digits:13', 'unique:' . Book::class],
             'title' => ['required', 'string'],
             'description' => ['required', 'string'],
         ]);
