@@ -54,7 +54,10 @@ class BookController extends Controller
             'description' => ['required', 'string'],
         ]);
 
-        Book::where('id', $request->id)->update($request->all());
+        Book::where('id', $request->id)
+            ->update(['isbn' => $request->isbn,
+            'title' => $request->title,
+            'description' => $request->description]);
 
         return redirect("books/".strval($request->id));
     }
