@@ -21,7 +21,7 @@
                         </div>
                     @endforeach
                 @endif
-                <a href="{{route('books.create')}}">Create</a>;
+                <a href="{{route('books.create')}}">Create new...</a>;
             </dl>
         </div>
     </div>
