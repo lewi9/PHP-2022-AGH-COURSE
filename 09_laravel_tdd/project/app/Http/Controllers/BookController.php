@@ -38,6 +38,6 @@ class BookController extends Controller
 
     public function show(int $id): View
     {
-        return view('books.show')->with('book', Book::where('id', $id)->get());
+        return view('books.show')->with('book', Book::where('id', $id)->get()[0]);
     }
 }

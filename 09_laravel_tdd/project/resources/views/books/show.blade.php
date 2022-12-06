@@ -9,7 +9,7 @@
             @markdown($book->title)
             @markdown($book->description)
             {{-- created based on https://flowbite.com/docs/typography/links/ --}}
-            <a href="{{ route('book.index') }}"
+            <a href="/books"
                class="font-medium text-blue-600 dark:text-blue-500 hover:underline mt-8">All comments...</a>
         </div>
     </div>
