@@ -30,9 +30,9 @@ class BookController extends Controller
         Book::create([
             'isbn' => $request->isbn,
             'title' => $request->title,
-            'description' => $request->description
+            'description' => $request->description,
         ]);
 
-        return redirect("books.show.$request->id");
+        return redirect("books.show.".strval($request->id));
     }
 }
