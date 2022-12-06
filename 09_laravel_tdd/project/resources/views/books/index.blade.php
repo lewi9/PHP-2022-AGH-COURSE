@@ -10,16 +10,24 @@
                 @if (count($books) === 0)
                     No books in database.
                 @else
+                    <table>
                     @foreach($books as $book)
-                        <div class="flex flex-col pb-3">
-                            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
-                                <a href="{{ route('comments.show', $book) }}">{{ $book->title }}</a>
-                            </dt>
-                            <dd class="text-lg font-semibold">
-                                @markdown($book->isbn)
-                            </dd>
-                        </div>
+                            <tr>
+                                <div class="flex flex-col pb-3">
+                                    <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
+                                        <td>
+                                            @markdown($book->isbn)
+
+                                        </td>
+                                        <td>
+                                            {{ $book->title }}
+                                        </td>
+                                    </dt>
+                                </div>
+                                <a href="/books/{{$book->id}}">Details</a>
+                            </tr>
                     @endforeach
+                    </table>
                 @endif
                 <a href="{{route('books.create')}}">Create new...</a>;
             </dl>
