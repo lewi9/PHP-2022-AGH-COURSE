@@ -31,3 +31,5 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::resource('comments', \App\Http\Controllers\CommentController::class);
+
+Route::resource('books', \App\Http\Controllers\BookController::class)->middleware('auth')->name('books');
