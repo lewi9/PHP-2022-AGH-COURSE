@@ -49,15 +49,25 @@ class BookController extends Controller
     public function update(Request $request): RedirectResponse
     {
         $request->validate([
-            'isbn' => ['required', 'string', 'digits:13', 'unique:' . Book::class],
+            'isbn' => ['required', 'string', 'digits:13'],
             'title' => ['required', 'string'],
             'description' => ['required', 'string'],
         ]);
 
-        Book::where('id', $request->id)
-            ->update(['isbn' => $request->isbn])
-            ->update(['title' => $request->title])
-            ->update(['description' => $request->description]);
+        /*if (Book::find(intval($request->id))) {
+            Book::where('id', intval($request->id))
+                ->update(['isbn' => $request->isbn,
+                        'title' => $request->title,
+                        'description' => $request->description]);
+        }*/
+        if (Book::find(intval($request->id))) {
+            $book = Book::where('id', intval($request->id))->get()[0];
+            $book->isbn = $request->isbn;
+            $book->title = $request->title;
+            $book->description = $request->description;
+        }
+
+
 
         return redirect("books/".strval($request->id));
     }
