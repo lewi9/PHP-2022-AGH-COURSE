@@ -33,7 +33,7 @@ class BookController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect("books.show.".strval($book->id));
+        return redirect("books/".strval($book->id));
     }
 
     public function show(int $id): View
