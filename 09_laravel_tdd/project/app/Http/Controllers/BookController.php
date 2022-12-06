@@ -27,17 +27,17 @@ class BookController extends Controller
             'description' => ['required', 'string'],
         ]);
 
-        Book::create([
+        $book = Book::create([
             'isbn' => $request->isbn,
             'title' => $request->title,
             'description' => $request->description,
         ]);
 
-        return redirect("books.show.".strval($request->id));
+        return redirect("books.show.".strval($book->id));
     }
 
-    public function show(Book $book): View
+    public function show(int $id): View
     {
-        return view('books.show')->with('book', $book);
+        return view('books.show')->with('book', Book::where('id', $id)->get());
     }
 }

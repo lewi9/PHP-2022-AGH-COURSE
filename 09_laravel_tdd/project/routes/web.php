@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/books', [\App\Http\Controllers\BookController::class, 'index'])->name('books.index');
     Route::get('/books/create', [\App\Http\Controllers\BookController::class, 'create'])->name('books.create');
     Route::post('/books', [\App\Http\Controllers\BookController::class, 'store']);
-    Route::get('/books/{id}', [\App\Http\Controllers\BookController::class, 'show'])->name('books.show.id');
+    Route::get('/books/{id}', [\App\Http\Controllers\BookController::class, 'show'])->name('books.show.{id}');
 });
 
 
