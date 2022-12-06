@@ -9,6 +9,11 @@
         <form method="POST" action="/books/update">
             @csrf
 
+            <div>
+                <x-input-label for="id" :value="__('Id')" />
+                <x-text-input id="id" class="block mt-1 w-full" type="text" name="id" value="{{$book->id}}" readonly/>
+                <x-input-error :messages="$errors->get('id')" class="mt-2" />
+            </div>
             <!-- Name -->
             <div>
                 <x-input-label for="isbn" :value="__('Isbn')" />
