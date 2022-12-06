@@ -13,17 +13,12 @@
                     <table>
                     @foreach($books as $book)
                             <tr>
-                                <div class="flex flex-col pb-3">
-                                    <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
-                                        <td>
-                                            @markdown($book->isbn)
-
-                                        </td>
-                                        <td>
-                                            {{ $book->title }}
-                                        </td>
-                                    </dt>
-                                </div>
+                                <td>
+                                    @markdown($book->isbn)
+                                </td>
+                                <td>
+                                    @markdown($book->title)
+                                </td>
                                 <a href="/books/{{$book->id}}">Details</a>
                             </tr>
                     @endforeach
