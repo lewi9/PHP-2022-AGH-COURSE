@@ -1,0 +1,11 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+parameters:
+    level: max
+    paths:
+        - .
+    excludePaths:
+        - vendor
+        - storage
+        - config
+        - tests_codeception/Support/_generated
