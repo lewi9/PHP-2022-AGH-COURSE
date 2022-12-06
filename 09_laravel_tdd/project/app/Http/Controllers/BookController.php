@@ -64,7 +64,7 @@ class BookController extends Controller
 
     public function delete(Request $request): RedirectResponse
     {
-        Book::destroy($request->id);
+        Book::destroy(intval($request->id));
         return redirect('/books');
     }
 }
