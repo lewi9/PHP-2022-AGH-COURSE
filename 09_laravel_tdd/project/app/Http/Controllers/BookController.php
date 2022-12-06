@@ -35,4 +35,9 @@ class BookController extends Controller
 
         return redirect("books.show.".strval($request->id));
     }
+
+    public function show(Book $book): View
+    {
+        return view('books.show')->with('book', $book);
+    }
 }
