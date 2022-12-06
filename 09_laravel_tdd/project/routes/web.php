@@ -35,8 +35,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/books/create', [\App\Http\Controllers\BookController::class, 'create'])->name('books.create');
     Route::post('/books', [\App\Http\Controllers\BookController::class, 'store']);
     Route::get('/books/{id}', [\App\Http\Controllers\BookController::class, 'show'])->name('books.show.{id}');
-    Route::get('/books/{id}/edit', [\App\Http\Controllers\BookController::class, '__invoke']);//->name('books.{id}.edit');
+    Route::get('/books/{id}/edit', [\App\Http\Controllers\BookController::class, 'edit'])->name('books.{id}.edit');
     Route::patch('/books/{id}', [\App\Http\Controllers\BookController::class, 'update'])->name('books.update');
+    Route::get('/books/{id}/delete', [\App\Http\Controllers\BookController::class, 'delete'])->name('books.{id}.delete');
 });
 
 

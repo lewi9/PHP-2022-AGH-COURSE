@@ -33,7 +33,7 @@ class BookController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect("books/".strval($book->id));
+        return redirect("/books/".strval($book->id));
     }
 
     public function show(int $id): View
@@ -41,7 +41,7 @@ class BookController extends Controller
         return view('books.show')->with('book', Book::where('id', $id)->get()[0]);
     }
 
-    public function __invoke(Request $request): View
+    public function edit(Request $request): View
     {
         return view('books.edit')->with('book', Book::where('id', $request->id)->get()[0]);
     }
@@ -59,6 +59,12 @@ class BookController extends Controller
             'title' => $request->title,
             'description' => $request->description]);
 
-        return redirect("books/".strval($request->id));
+        return redirect("/books/".strval($request->id));
+    }
+
+    public function delete(Request $request): RedirectResponse
+    {
+        Book::destroy($request->id);
+        return redirect('/books');
     }
 }
