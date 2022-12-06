@@ -40,4 +40,11 @@ class BookController extends Controller
     {
         return view('books.show')->with('book', Book::where('id', $id)->get()[0]);
     }
+
+    public function __invoke(Request $request): View
+    {
+        return view('books.edit')->with('book', Book::where('id', $request->id)->get()[0]);
+    }
+
+    public function update(): RedirectResponse
 }
