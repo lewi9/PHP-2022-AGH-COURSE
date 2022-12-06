@@ -54,21 +54,7 @@ class BookController extends Controller
             'description' => ['required', 'string'],
         ]);
 
-        /*if (Book::find(intval($request->id))) {
-            Book::where('id', intval($request->id))
-                ->update(['isbn' => $request->isbn,
-                        'title' => $request->title,
-                        'description' => $request->description]);
-        }*/
-        if (Book::find(intval($request->id))) {
-            $book = Book::where('id', intval($request->id))->get()[0];
-            $book->isbn = $request->isbn;
-            $book->title = $request->title;
-            $book->description = $request->description;
-            $book->save();
-        }
-
-
+        Book::where('id', $request->id)->update($request->all());
 
         return redirect("books/".strval($request->id));
     }

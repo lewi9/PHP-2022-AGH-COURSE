@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/books', [\App\Http\Controllers\BookController::class, 'store']);
     Route::get('/books/{id}', [\App\Http\Controllers\BookController::class, 'show'])->name('books.show.{id}');
     Route::get('/books/{id}/edit', [\App\Http\Controllers\BookController::class, '__invoke']);//->name('books.{id}.edit');
-    Route::patch('/books', [\App\Http\Controllers\BookController::class, 'update'])->name('books.update');
+    Route::patch('/books/{id}', [\App\Http\Controllers\BookController::class, 'update'])->name('books.update');
 });
 
 

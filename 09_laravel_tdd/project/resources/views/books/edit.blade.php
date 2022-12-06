@@ -6,7 +6,7 @@
             </a>
         </x-slot>
         <h2>Editing a book</h2>
-        <form method="POST" action="{{ route('books.update') }}">
+        <form method="PATCH" action="/books/{{$book->id}}">
             @csrf
 
             <div>
@@ -14,7 +14,7 @@
                 <x-text-input id="id" class="block mt-1 w-full" type="text" name="id" value="{{$book->id}}" readonly/>
                 <x-input-error :messages="$errors->get('id')" class="mt-2" />
             </div>
-            <!-- Name -->
+            <!-- Name -->s
             <div>
                 <x-input-label for="isbn" :value="__('Isbn')" />
                 <x-text-input id="isbn" class="block mt-1 w-full" type="text" name="isbn" value="{{$book->isbn}}" required autofocus />
