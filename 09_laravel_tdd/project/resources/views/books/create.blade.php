@@ -6,7 +6,7 @@
             </a>
         </x-slot>
         <h2>Creating a book</h2>
-        <form method="POST" action="{{ route('books') }}">
+        <form method="POST" action="/books">
             @csrf
 
             <!-- Name -->
